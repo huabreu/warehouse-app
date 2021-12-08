@@ -1,1 +1,7 @@
 <h1>Bem-vindo ao Warehouse App</h1>
+
+<h2>Galpões Cadastrados</h2>
+<% @warehouses.each do |w| %>
+  <%= w.name %>
+  <%= w.code %>
+<% end %>
