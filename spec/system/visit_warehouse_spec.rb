@@ -19,5 +19,20 @@ describe 'visitor view a warehouse' do
     expect(page).to have_content('Maceió/AL')
     expect(page).to have_content('Área Total: 10000 m2')
     expect(page).to have_content('Área Útil: 8000 m2')
+    #expect(page).to have_link('Voltar', href: root_path)
+  end
+
+  it 'and comeback to homepage' do
+    # Arrange 
+    Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão no centro da cidade',
+                     address: 'Av. Fernandes Lima', city: 'Maceió', state: 'AL',
+                     zip_code: '57050-000',
+                     total_area: 10000, useful_area: 8000)
+    # Act 
+    visit root_path
+    click_on 'Maceió'
+    click_on 'Voltar'
+    # Assert
+    expect(current_path).to eq root_path
   end
 end

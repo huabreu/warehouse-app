@@ -26,4 +26,22 @@ describe 'visitor view homepage' do
     expect(page).to have_content 'Vitória'
     expect(page).to have_content 'VIX'
   end
+
+  it 'do not see all warehouses details' do
+    # Arrange
+    Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão numa linda cidade',
+                     address: 'Av Fernandes Lima', city: 'Maceió', state: 'AL',
+                     zip_code: '57050-000',
+                     total_area: 10000, useful_area: 8000)
+
+    # Act
+    visit root_path
+
+    # Assert
+    expect(page).not_to have_content('Ótimo galpão numa linda cidade')
+    expect(page).not_to have_content('Av Fernandes Lima')
+    expect(page).not_to have_content('Maceió/AL')
+    expect(page).not_to have_content('57050-000')
+  end
+
 end
