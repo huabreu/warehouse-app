@@ -25,7 +25,6 @@ describe 'visitor view homepage' do
     expect(page).to have_content 'MCZ'
     expect(page).to have_content 'Juiz de Fora'
     expect(page).to have_content 'JDF'
-
   end
 
   it 'do not see all warehouses details' do

@@ -63,20 +63,26 @@ describe 'visitor register warehouse' do
     click_on 'Cadastrar um novo galpão'
     fill_in 'Nome', with: ''
     fill_in 'Código', with: ''
-    # fill_in 'Descrição', with: ''
-    # fill_in 'Endereço', with: ''
-    # fill_in 'Cidade', with: ''
-    # fill_in 'Estado', with: ''
-    # fill_in 'CEP', with: ''
-    # fill_in 'Área Total', with: ''
-    # fill_in 'Área Útil', with: ''
+    fill_in 'Descrição', with: ''
+    fill_in 'Endereço', with: ''
+    fill_in 'Cidade', with: ''
+    fill_in 'Estado', with: ''
+    fill_in 'CEP', with: ''
+    fill_in 'Área Total', with: ''
+    fill_in 'Área Útil', with: ''
     click_on 'Salvar'
 
     #assert
     expect(page).not_to have_content('Galpão cadastrado com sucesso!')
-    # expect(page).to have_content('Erro! Não foi possível salvar o galpão!')
-    # expect(page).to have_content('Erro! Nome não preenchido!')
-    # expect(page).to have_content('Erro! Código não preenchido!')
-    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content('Erro! Não foi possível salvar o galpão!')
+    expect(page).to have_content("Nome não pode ficar em branco")
+    expect(page).to have_content("Código não pode ficar em branco")
+    expect(page).to have_content("Descrição não pode ficar em branco")
+    expect(page).to have_content("Endereço não pode ficar em branco")
+    expect(page).to have_content("Cidade não pode ficar em branco")
+    expect(page).to have_content("Estado não pode ficar em branco")
+    expect(page).to have_content("CEP não pode ficar em branco")
+    expect(page).to have_content("Área Total não pode ficar em branco")
+    expect(page).to have_content("Área Útil não pode ficar em branco")
   end
 end
