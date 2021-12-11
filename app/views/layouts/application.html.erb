@@ -18,6 +18,8 @@
       </nav>
     </header>
     <main>
+      <h4><%= flash[:notice] %></h4> 
+      <h4><%= flash[:alert] %></h4> 
       <%= yield %>
     </main>
   </body>

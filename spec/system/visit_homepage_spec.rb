@@ -9,22 +9,23 @@ describe 'visitor view homepage' do
   end
 
   it 'view registered warehouses' do
-    Warehouse.new(name: 'Guarulhos', code: 'GRU').save()
-    Warehouse.new(name: 'Porto Alegre', code: 'POA').save()
-    Warehouse.new(name: 'São Luís', code: 'SLZ').save()
-    Warehouse.new(name: 'Vitória', code: 'VIX').save()
+    Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão no centro da cidade',
+                     address: 'Av. Fernandes Lima', zip_code: '57050-000', 
+                     city: 'Maceió', state: 'AL', 
+                     total_area: 10000, useful_area: 8000)
+    Warehouse.create(name: 'Juiz de Fora', code: 'JDF', description: 'Ótimo galpão a beira mar',
+                     address: 'Av. Rio Branco', zip_code: '36050-000', 
+                     city: 'Juiz de Fora', state: 'MG', 
+                     total_area: 20000, useful_area: 13000)
 
     visit root_path
 
     expect(page).to have_css 'h2', text: 'Galpões Cadastrados'
-    expect(page).to have_content 'Guarulhos'
-    expect(page).to have_content 'GRU'
-    expect(page).to have_content 'Porto Alegre'
-    expect(page).to have_content 'POA'
-    expect(page).to have_content 'São Luís'
-    expect(page).to have_content 'SLZ'
-    expect(page).to have_content 'Vitória'
-    expect(page).to have_content 'VIX'
+    expect(page).to have_content 'Maceió'
+    expect(page).to have_content 'MCZ'
+    expect(page).to have_content 'Juiz de Fora'
+    expect(page).to have_content 'JDF'
+
   end
 
   it 'do not see all warehouses details' do
