@@ -6,7 +6,7 @@ describe 'visitor register warehouse' do
 
     #act
     visit root_path
-    click_on 'Cadastrar um novo galpão'
+    click_on 'Cadastrar novo galpão'
 
     #assert
     expect(page).to have_content 'Novo Galpão'
@@ -29,7 +29,7 @@ describe 'visitor register warehouse' do
 
     #act
     visit root_path
-    click_on 'Cadastrar um novo galpão'
+    click_on 'Cadastrar novo galpão'
     fill_in 'Nome', with: 'Juiz de Fora'
     fill_in 'Código', with: 'JDF'
     fill_in 'Descrição', with: 'Lindo galpão a beira mar'
@@ -59,8 +59,7 @@ describe 'visitor register warehouse' do
 
     #act
     visit root_path
-    click_on 'Cadastrar um novo galpão'
-    click_on 'Cadastrar um novo galpão'
+    click_on 'Cadastrar novo galpão'
     fill_in 'Nome', with: ''
     fill_in 'Código', with: ''
     fill_in 'Descrição', with: ''
