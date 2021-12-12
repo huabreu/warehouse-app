@@ -76,6 +76,23 @@ describe 'visitor register supplier' do
 
     expect(page).not_to have_content('Fornecedor cadastrado com sucesso!')
     expect(page).to have_content('Erro! Não foi possível salvar o fornecedor!')
-    expect(page).to have_content("E-mail já está em uso")
+    expect(page).to have_content("CNPJ já está em uso")
+  end
+
+  it 'must have 13 digits' do
+
+    visit root_path
+    click_on 'Cadastrar novo fornecedor'
+    fill_in 'Nome Fantasia', with: 'Bola'
+    fill_in 'Razão Social', with: 'Bola SA'
+    fill_in 'CNPJ', with: '123467891234'
+    fill_in 'Endereço', with: 'Av. Campo de Futebol'
+    fill_in 'E-mail', with: 'fbonito@hotmail.com'
+    fill_in 'Telefone', with: '3215-6926'
+    click_on 'Salvar'
+
+    expect(page).not_to have_content('Fornecedor cadastrado com sucesso!')
+    expect(page).to have_content('Erro! Não foi possível salvar o fornecedor!')
+    expect(page).to have_content("CNPJ não possui o tamanho esperado (13 caracteres)")
   end
 end
