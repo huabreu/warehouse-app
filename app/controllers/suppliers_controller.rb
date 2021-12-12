@@ -17,5 +17,9 @@ class SuppliersController < ApplicationController
       id = params[:id]
       @supplier = Supplier.find(id)
     end
+
+    def index
+      puts 'ola'
+    end
   end
 end

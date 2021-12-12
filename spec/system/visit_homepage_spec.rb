@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'visitor view homepage' do
   it 'view welcome message' do
+
     visit root_path
 
     expect(page).to have_css('h1', text: 'WareHouse App')
@@ -9,6 +10,7 @@ describe 'visitor view homepage' do
   end
 
   it 'view registered warehouses' do
+
     Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão no centro da cidade',
                      address: 'Av. Fernandes Lima', zip_code: '57050-000', 
                      city: 'Maceió', state: 'AL', 
@@ -40,5 +42,12 @@ describe 'visitor view homepage' do
     expect(page).not_to have_content('Av Fernandes Lima')
     expect(page).not_to have_content('Maceió/AL')
     expect(page).not_to have_content('57050-000')
+  end
+
+  it 'view link to suppliers list' do
+
+    visit root_path
+    
+    expect(page).to have_link 'Lista de fornecedores'
   end
 end

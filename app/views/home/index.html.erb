@@ -1,9 +1,13 @@
 <h1>WareHouse App</h1>
 <h3>Boas vindas ao sistema de gestão de estoques</h3>
 
+<%= link_to('Lista de fornecedores', suppliers_path) %>
+
 <h2>Galpões Cadastrados</h2>
 <% @warehouses.each do |w| %>
   <%= link_to(w.name, warehouse_path(w.id)) %>
   <%= w.code %>
 <% end %>
+
+
 
