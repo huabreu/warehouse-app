@@ -39,6 +39,7 @@ describe 'visitor register warehouse' do
     fill_in 'CEP', with: '36014-520'
     fill_in 'Área Total', with: '20000'
     fill_in 'Área Útil', with: '15000'
+    
     click_on 'Salvar'
     
     #assert

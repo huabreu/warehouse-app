@@ -2,8 +2,8 @@
 
 <%= form_with(model: @supplier) do |form| %>
   <div>
-    <%= form.label :trade, 'Nome' %>
-    <%= form.text_field(:trade) %>
+    <%= form.label :trade_name, 'Nome Fantasia' %>
+    <%= form.text_field(:trade_name) %>
   </div>
   <div>
     <%= form.label :company, 'Razão Social' %>
@@ -11,7 +11,7 @@
   </div>
   <div>
     <%= form.label :cnpj, 'CNPJ' %>
-    <%= form.text_area(:cnpj) %>
+    <%= form.text_field(:cnpj) %>
   </div>
   <div>
     <%= form.label :address, 'Endereço' %>
