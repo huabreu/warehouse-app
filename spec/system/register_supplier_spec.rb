@@ -58,4 +58,24 @@ describe 'visitor register supplier' do
     expect(page).to have_content("CNPJ não pode ficar em branco")
     expect(page).to have_content("E-mail não pode ficar em branco")
   end
+
+  it 'CNPJ must be unique' do
+
+    Supplier.create(trade_name: 'Fornecedor Bonito', company: 'Fornecedor Bonito e Formoso SA', 
+                    cnpj: '1234567891234', email: 'fbonito@hotmail.com')
+
+    visit root_path
+    click_on 'Cadastrar novo fornecedor'
+    fill_in 'Nome Fantasia', with: 'Bola'
+    fill_in 'Razão Social', with: 'Bola SA'
+    fill_in 'CNPJ', with: '1234567891234'
+    fill_in 'Endereço', with: 'Av. Campo de Futebol'
+    fill_in 'E-mail', with: 'fbonito@hotmail.com'
+    fill_in 'Telefone', with: '3215-6926'
+    click_on 'Salvar'
+
+    expect(page).not_to have_content('Fornecedor cadastrado com sucesso!')
+    expect(page).to have_content('Erro! Não foi possível salvar o fornecedor!')
+    expect(page).to have_content("E-mail já está em uso")
+  end
 end
