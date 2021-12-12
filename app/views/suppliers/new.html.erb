@@ -1,3 +1,12 @@
+<% if @supplier.errors.any?%>
+  <span>Verifique os seguintes erros:</span>
+  <ul>
+  <% @supplier.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
 <h1>Novo Fornecedor</h1>
 
 <%= form_with(model: @supplier) do |form| %>

@@ -1,14 +1,16 @@
 
+<% if @warehouse.errors.any?%>
+<span>Verifique os seguintes erros:</span>
+<ul>
+<% @warehouse.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+<% end %>
+</ul>
+<% end %>
+
 <h1>Novo Galpão</h1>
 
-<% if @warehouse.errors.any?%>
-  <span>Verifique os seguintes erros:</span>
-  <ul>
-  <% @warehouse.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-  </ul>
-<% end %>
+
 
 <%= form_with(model: @warehouse) do |form| %>
   <div>
