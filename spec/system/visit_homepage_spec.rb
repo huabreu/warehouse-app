@@ -48,6 +48,6 @@ describe 'visitor view homepage' do
 
     visit root_path
     
-    expect(page).to have_link 'Lista de fornecedores'
+    expect(page).to have_link 'Lista de fornecedores', href: suppliers_path
   end
 end

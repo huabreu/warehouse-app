@@ -5,8 +5,10 @@
 
 <h2>Galpões Cadastrados</h2>
 <% @warehouses.each do |w| %>
-  <%= link_to(w.name, warehouse_path(w.id)) %>
-  <%= w.code %>
+  <li>
+    <%= link_to(w.name, warehouse_path(w.id)) %>
+    (<%= w.code %>)
+  </li>
 <% end %>
 
 

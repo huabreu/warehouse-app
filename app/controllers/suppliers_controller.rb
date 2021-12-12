@@ -12,14 +12,14 @@ class SuppliersController < ApplicationController
       flash.now[:alert] = 'Erro! Não foi possível salvar o fornecedor!'
       render 'new'
     end
+  end
 
-    def show
+  def show
       id = params[:id]
       @supplier = Supplier.find(id)
-    end
+  end
 
-    def index
-      puts 'ola'
-    end
+  def index
+    @suppliers = Supplier.all
   end
 end
