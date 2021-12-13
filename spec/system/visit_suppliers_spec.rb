@@ -25,6 +25,15 @@ describe 'visitor view list of suppliers' do
     expect(page).to have_content 'iippiiranga@hotmail.com'
     expect(page).to have_content '345896654'
   end
+
+  it 'there is no supplier registered yet' do
+
+  visit root_path
+  click_on 'Lista de fornecedores'
+
+  expect(page).to have_css 'h1', text: 'Fornecedores Cadastrados'
+  expect(page).to have_content 'Não existem fornecedores cadastrados no sistema'
+  end
 end
 
 

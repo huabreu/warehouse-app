@@ -79,7 +79,7 @@ describe 'visitor register supplier' do
     expect(page).to have_content("CNPJ já está em uso")
   end
 
-  it 'must have 13 digits' do
+  it 'CNPJ must have 13 digits' do
 
     visit root_path
     click_on 'Cadastrar novo fornecedor'
