@@ -1,5 +1,6 @@
 class Supplier < ApplicationRecord
-  validates :trade_name, :company, :cnpj, :email,
+  validates :trade_name, :company_name, :cnpj, :email,
   presence: true
-  validates :cnpj, uniqueness: true, length: { is: 13 }
+  validates :cnpj, uniqueness: true 
+  validates :cnpj, length: { is: 13 }
 end

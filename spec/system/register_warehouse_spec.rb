@@ -55,7 +55,7 @@ describe 'visitor register warehouse' do
     expect(page).to have_content('Galpão cadastrado com sucesso!')
   end
 
-  it 'all fields are mandatory' do
+  it 'but all fields are mandatory' do
     #arrange
 
     #act

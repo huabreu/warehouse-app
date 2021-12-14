@@ -39,16 +39,16 @@ describe 'visitor register supplier' do
     expect(page).to have_content('Fornecedor cadastrado com sucesso!')
   end
 
-  it 'some fields are mandatory' do
+  it 'without success' do
 
     visit root_path
     click_on 'Cadastrar novo fornecedor'
-    fill_in 'Nome Fantasia', with: ''
-    fill_in 'Razão Social', with: ''
-    fill_in 'CNPJ', with: ''
-    fill_in 'Endereço', with: 'Av. Rio Branco'
-    fill_in 'E-mail', with: ''
-    fill_in 'Telefone', with: '3215-6936'
+    # fill_in 'Nome Fantasia', with: ''
+    # fill_in 'Razão Social', with: ''
+    # fill_in 'CNPJ', with: ''
+    # fill_in 'Endereço', with: 'Av. Rio Branco'
+    # fill_in 'E-mail', with: ''
+    # fill_in 'Telefone', with: '3215-6936'
     click_on 'Salvar'
 
     expect(page).not_to have_content('Fornecedor cadastrado com sucesso!')
@@ -59,9 +59,9 @@ describe 'visitor register supplier' do
     expect(page).to have_content("E-mail não pode ficar em branco")
   end
 
-  it 'CNPJ must be unique' do
+  it 'but CNPJ must be unique' do
 
-    Supplier.create(trade_name: 'Fornecedor Bonito', company: 'Fornecedor Bonito e Formoso SA', 
+    Supplier.create(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
                     cnpj: '1234567891234', email: 'fbonito@hotmail.com')
 
     visit root_path
@@ -79,7 +79,7 @@ describe 'visitor register supplier' do
     expect(page).to have_content("CNPJ já está em uso")
   end
 
-  it 'CNPJ must have 13 digits' do
+  it 'but CNPJ must have 13 digits' do
 
     visit root_path
     click_on 'Cadastrar novo fornecedor'

@@ -4,7 +4,7 @@ class SuppliersController < ApplicationController
   end
 
   def create
-    supplier_params = params.require(:supplier).permit(:trade_name, :company, :address, :cnpj, :email, :phone) 
+    supplier_params = params.require(:supplier).permit(:trade_name, :company_name, :address, :cnpj, :email, :phone) 
     @supplier = Supplier.new(supplier_params)
     if @supplier.save()
       redirect_to supplier_path(@supplier.id), notice: 'Fornecedor cadastrado com sucesso!'

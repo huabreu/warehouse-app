@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'visitor view homepage' do
-  it 'view welcome message' do
+  it ' and view welcome message' do
 
     visit root_path
 
@@ -9,7 +9,7 @@ describe 'visitor view homepage' do
     expect(page).to have_css('h3', text: 'Boas vindas ao sistema de gestão de estoques')
   end
 
-  it 'view registered warehouses' do
+  it 'and view registered warehouses' do
 
     Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão no centro da cidade',
                      address: 'Av. Fernandes Lima', zip_code: '57050-000', 
@@ -29,7 +29,7 @@ describe 'visitor view homepage' do
     expect(page).to have_content 'JDF'
   end
 
-  it 'do not see all warehouses details' do
+  it 'and do not see all warehouses details' do
     # Arrange
     Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão numa linda cidade',
                      address: 'Av Fernandes Lima', city: 'Maceió', state: 'AL',
@@ -44,7 +44,7 @@ describe 'visitor view homepage' do
     expect(page).not_to have_content('57050-000')
   end
 
-  it 'view link to suppliers list' do
+  it 'and view link to suppliers list' do
 
     visit root_path
     

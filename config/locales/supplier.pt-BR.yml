@@ -5,7 +5,7 @@ pt-BR:
     attributes:
       supplier:
         trade_name: "Nome Fantasia"
-        company: "Razão Social"
+        company_name: "Razão Social"
         cnpj: "CNPJ"
         email: "E-mail"
         address: "Endereço"

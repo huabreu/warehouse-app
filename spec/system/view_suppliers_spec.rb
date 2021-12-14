@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe 'visitor view list of suppliers' do
-  it 'and see all registered suppliers' do
+describe 'visitor visit list of suppliers' do
+  it 'and view all registered suppliers' do
 
-    Supplier.create(trade_name: 'Fornecedor Bonito', company: 'Fornecedor Bonito e Formoso SA', 
+    Supplier.create(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
     cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
-    Supplier.create(trade_name: 'Ipiranga Logisticas', company: 'Ipiranga Logisticas SA', 
+    Supplier.create(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
     cnpj: '1234567811234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
 
     visit root_path
@@ -26,7 +26,7 @@ describe 'visitor view list of suppliers' do
     expect(page).to have_content '345896654'
   end
 
-  it 'there is no supplier registered yet' do
+  it 'but there is no supplier registered yet' do
 
   visit root_path
   click_on 'Lista de fornecedores'
