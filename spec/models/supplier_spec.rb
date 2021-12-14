@@ -54,10 +54,10 @@ RSpec.describe Supplier, type: :model do
       expect(supplier).not_to be_valid
     end
 
-    it 'cnpj equal to 12345678912232' do
+    it 'cnpj equal to 123456789112345' do
 
       supplier = Supplier.new(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
-                        cnpj: '12345678912323223', address: 'Rua Bonita', email: 'fbonito@hotmail.com', phone: '321654')
+                        cnpj: '123456789112345', address: 'Rua Bonita', email: 'fbonito@hotmail.com', phone: '321654')
 
       expect(supplier).not_to be_valid
     end

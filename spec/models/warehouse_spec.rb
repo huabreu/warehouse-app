@@ -112,6 +112,15 @@ RSpec.describe Warehouse, type: :model do
       expect(warehouse).not_to be_valid
     end
 
+    it 'zip_code equal to 75143-02533' do
+
+      warehouse = Warehouse.new(name: 'Curitiba', code: 'MCZ', description: 'Ótimo galpão mas é frio',
+      address: 'Av Coritiba', city: 'Curitiba', state: 'PR', zip_code: '75143-02533',
+      total_area: 5000, useful_area: 4000)
+
+      expect(warehouse).not_to be_valid
+    end
+
     it 'zip_code equal to 1234a-025' do
 
       warehouse = Warehouse.new(name: 'Curitiba', code: 'MCZ', description: 'Ótimo galpão mas é frio',
