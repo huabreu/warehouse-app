@@ -55,21 +55,21 @@ describe 'visitor register warehouse' do
     expect(page).to have_content('Galpão cadastrado com sucesso!')
   end
 
-  it 'but all fields are mandatory' do
+  it 'without success' do
     #arrange
 
     #act
     visit root_path
     click_on 'Cadastrar novo galpão'
-    fill_in 'Nome', with: ''
-    fill_in 'Código', with: ''
-    fill_in 'Descrição', with: ''
-    fill_in 'Endereço', with: ''
-    fill_in 'Cidade', with: ''
-    fill_in 'Estado', with: ''
-    fill_in 'CEP', with: ''
-    fill_in 'Área Total', with: ''
-    fill_in 'Área Útil', with: ''
+    # fill_in 'Nome', with: ''
+    # fill_in 'Código', with: ''
+    # fill_in 'Descrição', with: ''
+    # fill_in 'Endereço', with: ''
+    # fill_in 'Cidade', with: ''
+    # fill_in 'Estado', with: ''
+    # fill_in 'CEP', with: ''
+    # fill_in 'Área Total', with: ''
+    # fill_in 'Área Útil', with: ''
     click_on 'Salvar'
 
     #assert
