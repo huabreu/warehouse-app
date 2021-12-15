@@ -1,6 +1,21 @@
 require 'rails_helper'
 
+describe 'User register product model' do
+  it 'through a link on the homepage' do
 
+    visit root_path
+    click_on 'Cadastrar novo produto'
+
+    expect(page).to have_content 'Novo Produto'
+    expect(page).to have_field 'Nome'
+    expect(page).to have_field 'Fornecedor'
+    expect(page).to have_field 'Peso(g)'
+    expect(page).to have_field 'Altura(cm)'
+    expect(page).to have_field 'Largura(cm)'
+    expect(page).to have_field 'Comprimento(cm)'
+    expect(page).to have_field 'Código SKU'
+    expect(page).to have_button 'Salvar'
+  end
 
   it 'with success' do
     #arrange
