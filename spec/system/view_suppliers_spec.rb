@@ -3,9 +3,9 @@ require 'rails_helper'
 describe 'visitor visit list of suppliers' do
   it 'and view all registered suppliers' do
 
-    Supplier.create(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
+    Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
     cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
-    Supplier.create(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
+    Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
     cnpj: '1234567811234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
 
     visit root_path
