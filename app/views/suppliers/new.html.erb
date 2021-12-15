@@ -1,40 +1,5 @@
-<% if @supplier.errors.any?%>
-  <span>Verifique os seguintes erros:</span>
-  <ul>
-  <% @supplier.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-  </ul>
-<% end %>
 
 <h1>Novo Fornecedor</h1>
 
-<%= form_with(model: @supplier) do |form| %>
-  <div>
-    <%= form.label :trade_name, 'Nome Fantasia' %>
-    <%= form.text_field(:trade_name) %>
-  </div>
-  <div>
-    <%= form.label :company_name, 'Razão Social' %>
-    <%= form.text_field(:company_name) %>
-  </div>
-  <div>
-    <%= form.label :cnpj, 'CNPJ' %>
-    <%= form.text_field(:cnpj) %>
-  </div>
-  <div>
-    <%= form.label :address, 'Endereço' %>
-    <%= form.text_field(:address) %>
-  </div>
-  <div>
-    <%= form.label :email, 'E-mail' %>
-    <%= form.text_field(:email) %>
-  </div>
-  <div>
-    <%= form.label :phone, 'Telefone' %>
-    <%= form.text_field(:phone) %>
-  </div>
+<%= render partial: 'form', locals: { supplier: @supplier} %>
 
-  <%= form.submit 'Salvar' %>
-
-<% end %>
