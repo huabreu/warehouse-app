@@ -145,4 +145,10 @@ RSpec.describe ProductModel, type: :model do
       expect(product).not_to be_valid
     end
   end
+
+  it '.dimension' do
+    p = ProductModel.new(height: 12, width: 5, length: 30)
+
+    expect(p.dimensions).to eq '12 x 5 x 30'
+  end
 end
