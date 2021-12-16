@@ -41,7 +41,9 @@ describe 'User register product model' do
     expect(page).to have_content 'Produto cadastrado com sucesso!'
     expect(page).to have_content 'Caneca Star Wars'
     expect(page).to have_content '300g'
-    expect(page).to have_content 'Dimensões: 12 x 8 x 14' 
+    expect(page).to have_content 'Largura: 8cm'
+    expect(page).to have_content 'Altura: 12cm'
+    expect(page).to have_content 'Comprimento: 14cm'
     expect(page).to have_content 'SKU: CNSW2020123456789112'
     expect(page).to have_content 'Fornecedor: Ceramicas Geek'
   end

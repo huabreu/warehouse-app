@@ -4,8 +4,9 @@
   Não existem produtos cadastrados no sistema
 <% else %>
   <% @product_models.each do |pm| %>
-    <h3><%= pm.name %></h3>
+    <h3><%=link_to(pm.name, pm) %></h3>
     <li>SKU: <%= pm.sku_code %></li> 
     <li>Fornecdor: <%= pm.supplier.trade_name %></li> 
+    <li>Dimensões:<%= pm.dimensions %></li> 
   <% end %>
 <% end %>

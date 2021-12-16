@@ -4,11 +4,15 @@
 <dl>
   <dt>SKU:</dt>
   <dd><%= @product_model.sku_code %></dd>
-  <dt>Dimensões:</dt>
-  <dd><%= @product_model.dimensions %>
   <dt>Peso:</dt>
   <dd><%= @product_model.weight %>g</dd>
+  <dt>Altura:</dt>
+  <dd><%= @product_model.height %>cm</dd>
+  <dt>Largura:</dt>
+  <dd><%= @product_model.width %>cm</dd>
+  <dt>Comprimento:</dt>
+  <dd><%= @product_model.length %>cm</dd>
 </dl>
 
 
-<%= link_to 'Voltar', root_path %>
+<%= link_to 'Voltar', product_models_path %>

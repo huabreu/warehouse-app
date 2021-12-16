@@ -8,7 +8,7 @@ class ProductModelsController < ApplicationController
                                                                  :height, :width, :length, :weight)
     @product_model = product_model = ProductModel.new(product_model_params)
     if @product_model.save
-      redirect_to product_model_path(@product_model.id), notice: 'Produto cadastrado com sucesso!'
+      redirect_to @product_model, notice: 'Produto cadastrado com sucesso!'
     else
       flash.now[:alert] = 'Erro! Não foi possível cadastrar o produto!'
       render 'new'
