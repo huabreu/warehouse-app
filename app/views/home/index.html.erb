@@ -1,4 +1,7 @@
 <h1>WareHouse App</h1>
+<% if user_signed_in? %>
+  Olá usuário: <%= current_user.email %>
+<% end %>
 <h3>Boas vindas ao sistema de gestão de estoques</h3>
 
 <%= link_to('Lista de fornecedores', suppliers_path) %>
