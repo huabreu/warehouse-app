@@ -1,7 +1,24 @@
+<% if product_model.errors.any?%>
+  <span>Verifique os seguintes erros:</span>
+  <ul>
+  <% @product_model.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
 <%= form_with(model: product_model) do |form| %>
   <div>
     <%= form.label :name, 'Nome' %>
     <%= form.text_field(:name) %>
+  </div>
+  <div>
+    <%= form.label :supplier_id, 'Fornecedor' %>
+    <%= form.collection_select :supplier_id, Supplier.order(:trade_name), :id, :trade_name %>
+  </div>
+  <div>
+    <%= form.label :sku_code, 'Código SKU' %>
+    <%= form.text_field(:sku_code) %>
   </div>
   <div>
     <%= form.label :weight, 'Peso(g)' %>
@@ -19,14 +36,7 @@
     <%= form.label :length, 'Comprimento(cm)' %>
     <%= form.number_field(:length) %>
   </div>
-  <div>
-    <%= form.label :sku_code, 'Código SKU' %>
-    <%= form.text_field(:sku_code) %>
-  </div>
-  <div>
-    <%= form.label :supplier_id, 'Fornecedor' %>
-    <%= form.collection_select :supplier_id, Supplier.order(:trade_name), :id, :trade_name %>
-  </div>
+
 
   <%= form.submit 'Salvar' %>
 

@@ -45,5 +45,22 @@ describe 'User register product model' do
     expect(page).to have_content 'SKU: CNSW2020123456789112'
     expect(page).to have_content 'Fornecedor: Ceramicas Geek'
   end
+
+  it 'without success' do
+
+    visit root_path
+    click_on 'Cadastrar novo produto'
+    click_on 'Salvar'
+  
+    expect(page).not_to have_content('Produto cadastrado com sucesso!')
+    expect(page).to have_content('Erro! Não foi possível cadastrar o produto!')
+    expect(page).to have_content("Nome não pode ficar em branco")
+    expect(page).to have_content("Peso não pode ficar em branco")
+    expect(page).to have_content("Altura não pode ficar em branco")
+    expect(page).to have_content("Largura não pode ficar em branco")
+    expect(page).to have_content("Comprimento não pode ficar em branco")
+    expect(page).to have_content("Código SKU não pode ficar em branco")
+    # expect(page).to have_content("FOrnecedor não pode ficar em branco")
+  end
 end
 
