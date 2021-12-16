@@ -14,7 +14,7 @@
   </div>
   <div>
     <%= form.label :supplier_id, 'Fornecedor' %>
-    <%= form.collection_select :supplier_id, Supplier.order(:trade_name), :id, :trade_name %>
+    <%= form.collection_select :supplier_id, Supplier.order(:trade_name), :id, :trade_name, {include_blank: true} %>
   </div>
   <div>
     <%= form.label :sku_code, 'Código SKU' %>

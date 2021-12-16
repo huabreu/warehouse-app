@@ -60,7 +60,7 @@ describe 'User register product model' do
     expect(page).to have_content("Largura não pode ficar em branco")
     expect(page).to have_content("Comprimento não pode ficar em branco")
     expect(page).to have_content("Código SKU não pode ficar em branco")
-    # expect(page).to have_content("FOrnecedor não pode ficar em branco")
+    expect(page).to have_content("Fornecedor é obrigatório(a)")
   end
 end
 
