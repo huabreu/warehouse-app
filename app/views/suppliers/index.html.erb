@@ -4,11 +4,10 @@
   Não existem fornecedores cadastrados no sistema
 <% else %>
   <% @suppliers.each do |s| %>
-    <h2><%= s.trade_name %></h2>
-    <h3>Dados Cadastrais:</h3>
-    <li>Razão social: <%= s.company_name %></li> 
+    <h2><%= link_to s.trade_name, s %></h2>
+    <!-- <li>Razão social: <%= s.company_name %></li> 
     <li>CNPJ: <%= s.cnpj %></li> 
-    <li>Endereço: <%= s.address %></li> 
+    <li>Endereço: <%= s.address %></li>  -->
     <li>E-mail: <%= s.email %></li> 
     <li>Telefone: <%= s.phone %></li> 
   <% end %>

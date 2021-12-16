@@ -34,6 +34,21 @@ describe 'visitor visit list of suppliers' do
   expect(page).to have_css 'h1', text: 'Fornecedores Cadastrados'
   expect(page).to have_content 'Não existem fornecedores cadastrados no sistema'
   end
+
+  it 'and view a specific supplier' do
+    Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
+    cnpj: '1234567811234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
+
+    visit suppliers_path
+    click_on 'Ipiranga Logisticas'
+
+    expect(page).to have_content 'Ipiranga Logisticas'
+    expect(page).to have_content 'Ipiranga Logisticas SA'
+    expect(page).to have_content '1234567811234'
+    expect(page).to have_content 'Av. Don Pedro II'
+    expect(page).to have_content 'iippiiranga@hotmail.com'
+    expect(page).to have_content '345896654'
+  end
 end
 
 
