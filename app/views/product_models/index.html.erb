@@ -1,0 +1,11 @@
+<h1>Produtos Cadastrados</h1>
+
+<%if @product_models.empty? %>
+  Não existem produtos cadastrados no sistema
+<% else %>
+  <% @product_models.each do |pm| %>
+    <h3><%= pm.name %></h3>
+    <li>SKU: <%= pm.sku_code %></li> 
+    <li>Fornecdor: <%= pm.supplier.trade_name %></li> 
+  <% end %>
+<% end %>

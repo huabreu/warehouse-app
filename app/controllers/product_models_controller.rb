@@ -19,4 +19,8 @@ class ProductModelsController < ApplicationController
     id = params[:id]
     @product_model = ProductModel.find(id)
   end
+
+  def index
+    @product_models = ProductModel.all
+  end
 end
