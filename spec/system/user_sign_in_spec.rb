@@ -12,7 +12,25 @@ describe 'User login' do
 
     expect(current_path).to eq root_path
     expect(page).to have_link 'Sair'
+    expect(page).to have_content 'Login efetuado com sucesso.'
+    expect(page).to have_content 'Olá usuário: hugorabreu@gmail.com'
     expect(page).not_to have_link 'Entrar'
-    expect(page).to have_content 'Olá usuário hugorabreu@gmail.com'
+  end
+
+  it 'and log out' do
+    User.create!(email: 'hugorabreu@gmail.com', password: '123456')
+
+    visit root_path
+    click_on 'Entrar'
+    fill_in 'E-mail', with: 'hugorabreu@gmail.com'
+    fill_in 'Senha', with: '123456'
+    click_on 'Log in'
+    click_on 'Sair'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_link 'Entrar'
+    expect(page).to have_content 'Logout efetuado com sucesso.'
+    expect(page).not_to have_link 'Sair'
+    expect(page).not_to have_content 'Olá usuário: hugorabreu@gmail.com'
   end
 end
