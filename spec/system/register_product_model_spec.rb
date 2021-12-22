@@ -9,10 +9,10 @@ describe 'User register product model' do
     expect(page).to have_content 'Novo Produto'
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Fornecedor'
-    expect(page).to have_field 'Peso(g)'
-    expect(page).to have_field 'Altura(cm)'
-    expect(page).to have_field 'Largura(cm)'
-    expect(page).to have_field 'Comprimento(cm)'
+    expect(page).to have_field 'Peso'
+    expect(page).to have_field 'Altura'
+    expect(page).to have_field 'Largura'
+    expect(page).to have_field 'Comprimento'
     expect(page).to have_field 'Código SKU'
     expect(page).to have_button 'Salvar'
   end
@@ -28,10 +28,10 @@ describe 'User register product model' do
     visit root_path
     click_on 'Cadastrar novo produto'
     fill_in 'Nome', with: 'Caneca Star Wars'
-    fill_in 'Peso(g)', with: '300'
-    fill_in 'Altura(cm)', with: 12
-    fill_in 'Largura(cm)', with: 8
-    fill_in 'Comprimento(cm)', with: 14
+    fill_in 'Peso', with: '300'
+    fill_in 'Altura', with: 12
+    fill_in 'Largura', with: 8
+    fill_in 'Comprimento', with: 14
     fill_in 'Código SKU', with: 'CNSW2020123456789112'
     select 'Ceramicas Geek', from: 'Fornecedor'
 
@@ -40,10 +40,10 @@ describe 'User register product model' do
     #assert
     expect(page).to have_content 'Produto cadastrado com sucesso!'
     expect(page).to have_content 'Caneca Star Wars'
-    expect(page).to have_content '300g'
-    expect(page).to have_content 'Largura: 8cm'
-    expect(page).to have_content 'Altura: 12cm'
-    expect(page).to have_content 'Comprimento: 14cm'
+    expect(page).to have_content '300 g'
+    expect(page).to have_content 'Largura: 8 cm'
+    expect(page).to have_content 'Altura: 12 cm'
+    expect(page).to have_content 'Comprimento: 14 cm'
     expect(page).to have_content 'SKU: CNSW2020123456789112'
     expect(page).to have_content 'Fornecedor: Ceramicas Geek'
   end

@@ -9,11 +9,11 @@
 
 <%= form_with(model: supplier) do |form| %>
   <div>
-    <%= form.label :trade_name, 'Nome Fantasia' %>
+    <%= form.label :trade_name %>
     <%= form.text_field(:trade_name) %>
   </div>
   <div>
-    <%= form.label :company_name, 'Razão Social' %>
+    <%= form.label :company_name %>
     <%= form.text_field(:company_name) %>
   </div>
   <div>
@@ -21,15 +21,15 @@
     <%= form.text_field(:cnpj) %>
   </div>
   <div>
-    <%= form.label :address, 'Endereço' %>
+    <%= form.label :address %>
     <%= form.text_field(:address) %>
   </div>
   <div>
-    <%= form.label :email, 'E-mail' %>
+    <%= form.label :email %>
     <%= form.text_field(:email) %>
   </div>
   <div>
-    <%= form.label :phone, 'Telefone' %>
+    <%= form.label :phone %>
     <%= form.text_field(:phone) %>
   </div>
 

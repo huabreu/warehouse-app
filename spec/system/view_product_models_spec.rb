@@ -42,10 +42,10 @@ describe 'Visitor visit list of product models' do
     expect(page).to have_content 'Teclado Digitador'
     expect(page).to have_content 'Fornecedor: Fornecedor Bonito'
     expect(page).to have_content 'SKU: TCDD2123212322ASD231'
-    expect(page).to have_content 'Peso: 200g'
-    expect(page).to have_content 'Largura: 30cm'
-    expect(page).to have_content 'Altura: 5cm'
-    expect(page).to have_content 'Comprimento: 12cm'
+    expect(page).to have_content 'Peso: 200 g'
+    expect(page).to have_content 'Largura: 30 cm'
+    expect(page).to have_content 'Altura: 5 cm'
+    expect(page).to have_content 'Comprimento: 12 cm'
 
   end
 end

@@ -9,39 +9,39 @@
 
 <%= form_with(model: warehouse) do |form| %>
   <div>
-    <%= form.label :name, 'Nome' %>
+    <%= form.label :name %>
     <%= form.text_field(:name) %>
   </div>
   <div>
-    <%= form.label :code, 'Código' %>
+    <%= form.label :code %>
     <%= form.text_field(:code) %>
   </div>
   <div>
-    <%= form.label :description, 'Descrição' %>
+    <%= form.label :description %>
     <%= form.text_area(:description) %>
   </div>
   <div>
-    <%= form.label :address, 'Endereço' %>
+    <%= form.label :address %>
     <%= form.text_field(:address) %>
   </div>
   <div>
-    <%= form.label :city, 'Cidade' %>
+    <%= form.label :city %>
     <%= form.text_field(:city) %>
   </div>
   <div>
-    <%= form.label :state, 'Estado' %>
+    <%= form.label :state %>
     <%= form.text_field(:state) %>
   </div>
   <div>
-    <%= form.label :zip_code, 'CEP' %>
+    <%= form.label :zip_code %>
     <%= form.text_field(:zip_code) %>
   </div>
   <div>
-    <%= form.label :total_area, 'Área Total' %>
+    <%= form.label :total_area %>
     <%= form.number_field(:total_area) %>
   </div>
   <div>
-    <%= form.label :useful_area, 'Área Útil' %>
+    <%= form.label :useful_area %>
     <%= form.number_field(:useful_area) %>
   </div>
   <%= form.submit 'Salvar' %>

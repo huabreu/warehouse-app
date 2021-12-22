@@ -6,9 +6,11 @@ describe 'User login' do
 
     visit root_path
     click_on 'Entrar'
-    fill_in 'E-mail', with: 'hugorabreu@gmail.com'
-    fill_in 'Senha', with: '123456'
-    click_on 'Log in'
+    within('form#new_user') do
+      fill_in 'E-mail', with: 'hugorabreu@gmail.com'
+      fill_in 'Senha', with: '123456'
+      click_on 'Entrar'
+    end
 
     expect(current_path).to eq root_path
     expect(page).to have_link 'Sair'
@@ -22,9 +24,11 @@ describe 'User login' do
 
     visit root_path
     click_on 'Entrar'
-    fill_in 'E-mail', with: 'hugorabreu@gmail.com'
-    fill_in 'Senha', with: '123456'
-    click_on 'Log in'
+    within('form#new_user') do
+      fill_in 'E-mail', with: 'hugorabreu@gmail.com'
+      fill_in 'Senha', with: '123456'
+      click_on 'Entrar'
+    end
     click_on 'Sair'
 
     expect(current_path).to eq root_path

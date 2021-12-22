@@ -9,32 +9,32 @@
 
 <%= form_with(model: product_model) do |form| %>
   <div>
-    <%= form.label :name, 'Nome' %>
+    <%= form.label :name  %>
     <%= form.text_field(:name) %>
   </div>
   <div>
-    <%= form.label :supplier_id, 'Fornecedor' %>
+    <%= form.label :supplier_id %>
     <%= form.collection_select :supplier_id, Supplier.order(:trade_name), :id, :trade_name, {include_blank: true} %>
   </div>
   <div>
-    <%= form.label :sku_code, 'Código SKU' %>
+    <%= form.label :sku_code %>
     <%= form.text_field(:sku_code) %>
   </div>
   <div>
-    <%= form.label :weight, 'Peso(g)' %>
-    <%= form.number_field(:weight) %>
+    <%= form.label :weight %>
+    <%= form.number_field(:weight) %> (g)
   </div>
   <div>
-    <%= form.label :height, 'Altura(cm)' %>
-    <%= form.number_field(:height) %>
+    <%= form.label :height %>
+    <%= form.number_field(:height) %> (cm)
   </div>
   <div>
-    <%= form.label :width, 'Largura(cm)' %>
-    <%= form.number_field(:width) %>
+    <%= form.label :width %>
+    <%= form.number_field(:width) %> (cm)
   </div>
   <div>
-    <%= form.label :length, 'Comprimento(cm)' %>
-    <%= form.number_field(:length) %>
+    <%= form.label :length  %>
+    <%= form.number_field(:length) %> (cm)
   </div>
 
 
