@@ -1,4 +1,6 @@
 class WarehousesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  
   def show
     id = params[:id]
     @warehouse = Warehouse.find(id)

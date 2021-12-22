@@ -1,16 +1,36 @@
 require 'rails_helper'
 
-describe 'visitor register warehouse' do
+describe 'user register warehouse' do
+  it 'visitor do not see the menu' do
+
+
+    visit root_path
+
+    expect(page).not_to have_link 'Cadastrar novo galpão'
+  end
+
+  it 'visitor is unable to access the form' do
+    #act
+    visit new_warehouse_path
+    #assert
+    expect(current_path).to eq  new_user_session_path
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
+  end
+
   it 'through a link on the homepage' do
     #arrange
-
+    User.create!(email: 'hugorabreu@gmail.com', password: '123456')
     #act
     visit root_path
+    click_on 'Entrar'
+    within('form#new_user') do
+      fill_in 'E-mail', with: 'hugorabreu@gmail.com'
+      fill_in 'Senha', with: '123456'
+      click_on 'Entrar'
+    end
     click_on 'Cadastrar novo galpão'
-
     #assert
     expect(page).to have_content 'Novo Galpão'
-
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Código'
     expect(page).to have_field 'Descrição'
@@ -20,14 +40,14 @@ describe 'visitor register warehouse' do
     expect(page).to have_field 'CEP'
     expect(page).to have_field 'Área Total'
     expect(page).to have_field 'Área Útil'
-
     expect(page).to have_button 'Salvar'
   end
 
   it 'with success' do
     #arrange
-
+    user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
     #act
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo galpão'
     fill_in 'Nome', with: 'Juiz de Fora'
@@ -57,8 +77,9 @@ describe 'visitor register warehouse' do
 
   it 'without success' do
     #arrange
-
+    user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
     #act
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo galpão'
     # fill_in 'Nome', with: ''

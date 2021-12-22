@@ -1,4 +1,6 @@
 class SuppliersController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
+
   def new
     @supplier = Supplier.new
   end

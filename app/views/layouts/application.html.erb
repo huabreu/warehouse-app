@@ -12,7 +12,7 @@
 
   <body>
     <header>
-      <nav aria-label="Login_Menu">
+      <nav aria-label="Login Menu">
       <% if user_signed_in? %>
         <span>Olá usuário: <%= current_user.email %></span> |
         <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
@@ -20,11 +20,13 @@
         <%= link_to 'Entrar', new_user_session_path %>
       <% end %>
       </nav >
-      <nav aria-label="Navigation_Menu">
+      <nav aria-label="Navigation Menu">
         <%= link_to 'Página inicial', root_path %>
-        <%= link_to 'Cadastrar novo galpão', new_warehouse_path %>
-        <%= link_to 'Cadastrar novo fornecedor', new_supplier_path %>
-        <%= link_to 'Cadastrar novo produto', new_product_model_path %>
+        <% if user_signed_in? %>
+          <%= link_to 'Cadastrar novo galpão', new_warehouse_path %>
+          <%= link_to 'Cadastrar novo fornecedor', new_supplier_path %>
+          <%= link_to 'Cadastrar novo produto', new_product_model_path %>
+        <% end %>
       </nav>
     </header>
     <main>

@@ -1,4 +1,6 @@
 class ProductModelsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  
   def new
     @product_model = ProductModel.new
   end

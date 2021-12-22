@@ -1,8 +1,26 @@
 require 'rails_helper'
 
 describe 'User register product model' do
-  it 'through a link on the homepage' do
+  it 'visitor do not see the menu' do
 
+
+    visit root_path
+
+    expect(page).not_to have_link 'Cadastrar novo produto'
+  end
+
+  it 'visitor is unable to access the form' do
+    #act
+    visit new_product_model_path
+    #assert
+    expect(current_path).to eq  new_user_session_path
+  end
+
+  it 'through a link on the homepage' do
+    #arrange
+    user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
+    #act
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo produto'
 
@@ -24,7 +42,9 @@ describe 'User register product model' do
     Supplier.create!(trade_name: 'Imaginarium', company_name: 'Imaginarium SA', 
     cnpj: 1234547891123, email: 'imaginarium@gmaial.com')
 
+    user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
     #act
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo produto'
     fill_in 'Nome', with: 'Caneca Star Wars'
@@ -49,9 +69,11 @@ describe 'User register product model' do
   end
 
   it 'without success' do
-
-    visit root_path
-    click_on 'Cadastrar novo produto'
+    #arrange
+    user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
+    #act
+    login_as(user)
+    visit new_product_model_path
     click_on 'Salvar'
   
     expect(page).not_to have_content('Produto cadastrado com sucesso!')

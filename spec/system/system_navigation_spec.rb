@@ -10,10 +10,10 @@ describe 'visitor navigates' do
     # expect(page).to have_css 'nav a', text:'Cadastrar novo fornecedor'
     
     #assert2
-    # within "nav.User Menu" do
+    within 'nav[2]' do
       expect(page).to have_link 'Página inicial', href: root_path
-      expect(page).to have_link 'Cadastrar novo galpão', href: new_warehouse_path
-      expect(page).to have_link 'Cadastrar novo fornecedor', href: new_supplier_path
-    # end
+      # expect(page).to have_link 'Cadastrar novo galpão', href: new_warehouse_path
+      # expect(page).to have_link 'Cadastrar novo fornecedor', href: new_supplier_path
+    end
   end
 end
