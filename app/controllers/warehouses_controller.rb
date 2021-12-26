@@ -1,5 +1,5 @@
 class WarehousesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   
   def show
     id = params[:id]
@@ -20,6 +20,22 @@ class WarehousesController < ApplicationController
     else
       flash.now[:alert] = 'Erro! Não foi possível salvar o galpão!'
       render 'new'
+    end
+  end
+
+  def edit
+    @warehouse = Warehouse.find(params[:id])
+  end
+
+  def update
+    @warehouse = Warehouse.find(params[:id])
+    @warehouse.update(params.require(:warehouse).permit(:name, :code, :address, :city, :state, :zip_code,
+    :description, :useful_area, :total_area))
+    if @warehouse.save()
+      redirect_to @warehouse, notice: 'Galpão editado com sucesso!'
+    else
+      flash.now[:alert] = 'Erro! Não foi possível editar o galpão!'
+      render 'edit'
     end
   end
 end

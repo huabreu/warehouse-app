@@ -15,5 +15,8 @@
   <dd><%= @warehouse.useful_area %> m2</dd>
 </dl>
 
+<nav>
+  <%= link_to 'Editar', edit_warehouse_path(@warehouse) %>
+  <%= link_to 'Voltar', root_path %>
+</nav>
 
-<%= link_to 'Voltar', root_path %>
