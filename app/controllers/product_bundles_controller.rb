@@ -20,4 +20,8 @@ class ProductBundlesController < ApplicationController
       render 'new'
     end
   end
+
+  def index
+    @product_bundles = ProductBundle.all
+  end
 end
