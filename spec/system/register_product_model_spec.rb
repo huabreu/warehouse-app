@@ -24,7 +24,6 @@ describe 'User register product model' do
     expect(page).to have_field 'Altura'
     expect(page).to have_field 'Largura'
     expect(page).to have_field 'Comprimento'
-    expect(page).to have_field 'Código SKU'
     expect(page).to have_button 'Salvar'
   end
 
@@ -45,7 +44,6 @@ describe 'User register product model' do
     fill_in 'Altura', with: 12
     fill_in 'Largura', with: 8
     fill_in 'Comprimento', with: 14
-    fill_in 'Código SKU', with: 'CNSW2020123456789112'
     select 'Ceramicas Geek', from: 'Fornecedor'
 
     click_on 'Salvar'
@@ -57,7 +55,7 @@ describe 'User register product model' do
     expect(page).to have_content 'Largura: 8 cm'
     expect(page).to have_content 'Altura: 12 cm'
     expect(page).to have_content 'Comprimento: 14 cm'
-    expect(page).to have_content 'SKU: CNSW2020123456789112'
+    expect(page).to have_content 'SKU:'
     expect(page).to have_content 'Fornecedor: Ceramicas Geek'
   end
 
@@ -76,7 +74,6 @@ describe 'User register product model' do
     expect(page).to have_content("Altura não pode ficar em branco")
     expect(page).to have_content("Largura não pode ficar em branco")
     expect(page).to have_content("Comprimento não pode ficar em branco")
-    expect(page).to have_content("Código SKU não pode ficar em branco")
     expect(page).to have_content("Fornecedor é obrigatório(a)")
   end
 end

@@ -17,10 +17,6 @@
     <%= form.collection_select :supplier_id, Supplier.order(:trade_name), :id, :trade_name, {include_blank: true} %>
   </div>
   <div>
-    <%= form.label :sku_code %>
-    <%= form.text_field(:sku_code) %>
-  </div>
-  <div>
     <%= form.label :weight %>
     <%= form.number_field(:weight) %> (g)
   </div>
