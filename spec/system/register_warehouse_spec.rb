@@ -1,14 +1,6 @@
 require 'rails_helper'
 
 describe 'user register warehouse' do
-  it 'visitor do not see the menu' do
-
-
-    visit root_path
-
-    expect(page).not_to have_link 'Cadastrar novo galpão'
-  end
-
   it 'visitor is unable to access the form' do
     #act
     visit new_warehouse_path

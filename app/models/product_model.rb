@@ -1,5 +1,7 @@
 class ProductModel < ApplicationRecord
   belongs_to :supplier
+  has_many :product_bundle_items
+  has_many :product_bundles, through: :product_bundle_items
 
   validates :name, :sku_code, :weight, :height, :width, :length, 
   presence: true

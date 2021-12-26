@@ -16,4 +16,13 @@ describe 'visitor navigates' do
       # expect(page).to have_link 'Cadastrar novo fornecedor', href: new_supplier_path
     end
   end
+
+  it 'visitor do not see the menu' do
+
+    visit root_path
+
+    expect(page).not_to have_link 'Cadastrar novo produto'
+    expect(page).not_to have_link 'Cadastrar novo galpão'
+    expect(page).not_to have_link 'Cadastrar novo fonecedor'
+  end
 end

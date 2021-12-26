@@ -1,13 +1,6 @@
 require 'rails_helper'
 
 describe 'visitor register supplier' do
-  it 'visitor do not see the menu' do
-
-    visit root_path
-
-    expect(page).not_to have_link 'Cadastrar novo fornecedor'
-  end
-
   it 'visitor is unable to access the form' do
     #act
     visit new_supplier_path

@@ -1,19 +1,12 @@
 require 'rails_helper'
 
 describe 'User register product model' do
-  it 'visitor do not see the menu' do
-
-
-    visit root_path
-
-    expect(page).not_to have_link 'Cadastrar novo produto'
-  end
-
   it 'visitor is unable to access the form' do
     #act
     visit new_product_model_path
     #assert
     expect(current_path).to eq  new_user_session_path
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 
   it 'through a link on the homepage' do

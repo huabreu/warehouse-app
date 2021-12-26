@@ -17,11 +17,11 @@
 <%if @supplier.product_models.empty? %>
   Não existem produtos cadastrados para esse fornecedor
 <% else %>
-  <% @supplier.product_models.each do |pm| %>
-    <h3><%=link_to(pm.name, pm) %></h3>
-    <li>SKU: <%= pm.sku_code %></li> 
-    <li>Fornecdor: <%= pm.supplier.trade_name %></li> 
-    <li>Dimensões:<%= pm.dimensions %></li> 
+  <% @supplier.product_models.each do |p| %>
+    <h3><%=link_to(p.name, p) %></h3>
+    <li>SKU: <%= p.sku_code %></li> 
+    <li>Fornecdor: <%= p.supplier.trade_name %></li> 
+    <li>Dimensões:<%= p.dimensions %></li> 
   <% end %>
 <% end %>
 

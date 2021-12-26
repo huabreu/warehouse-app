@@ -1,0 +1,31 @@
+<% if product_bundle.errors.any?%>
+  <span>Verifique os seguintes erros:</span>
+  <ul>
+  <% @product_bundle.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: product_bundle) do |form| %>
+  <div>
+    <%= form.label :name  %>
+    <%= form.text_field(:name) %>
+  </div>
+  <div>
+    <%= form.label :sku_code %>
+    <%= form.text_field(:sku_code) %>
+  </div>
+  <div>
+    <span>Selecione os produtos desejados:</span>
+    <%= form.collection_check_boxes :product_model_ids, ProductModel.all, :id, :name %>
+  </div>
+  <!-- <div>
+    <%= form.label :weight %>
+    <%= form.number_field(:weight) %> (g)
+  </div> -->
+
+
+  <%= form.submit 'Salvar' %>
+
+<% end %>
