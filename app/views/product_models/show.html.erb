@@ -14,5 +14,7 @@
   <dd><%= @product_model.length %> cm</dd>
 </dl>
 
-
-<%= link_to 'Voltar', product_models_path %>
+<nav>
+  <%= link_to 'Editar', edit_product_model_path(@product_model) %>
+  <%= link_to 'Voltar', product_models_path %>
+</nav>
