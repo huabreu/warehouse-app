@@ -17,12 +17,16 @@ describe 'User view supplier details' do
   end
 
   it 'and view the supplier`s products' do
-  s = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
+  supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
     cnpj: '1134567818234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
+  other_supplier = Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
+    cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
 
-  ProductModel.create!(name:'Teclado Digitador', supplier: s, sku_code: 'TCDD2123212322ASD231',
+  ProductModel.create!(name:'Teclado Digitador', supplier: supplier, sku_code: 'TCDD2123212322ASD231',
     weight: 200, width: 30, height: 5, length: 12)
-  ProductModel.create!(name:'Som Muito Alto', supplier: s, sku_code: 'SMAA2123212322ASD231',
+  ProductModel.create!(name:'Som Muito Alto', supplier: supplier, sku_code: 'SMAA2123212322ASD231',
+  weight: 500, width: 30, height: 20, length: 12)
+  ProductModel.create!(name:'Som Muito Baixo', supplier: other_supplier, sku_code: 'SMAB2123212322ASD231',
   weight: 500, width: 30, height: 20, length: 12)
 
   visit suppliers_path
@@ -34,5 +38,7 @@ describe 'User view supplier details' do
   expect(page).to have_content 'TCDD2123212322ASD231'
   expect(page).to have_content 'Som Muito Alto'
   expect(page).to have_content 'SMAA2123212322ASD231'
+  expect(page).not_to have_content 'Som Muito Baixo'
+  expect(page).not_to have_content 'SMAB2123212322ASD231'
   end
 end

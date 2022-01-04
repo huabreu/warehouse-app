@@ -150,7 +150,7 @@ RSpec.describe ProductModel, type: :model do
     product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
       weight: 200, width: 30, height: 5, length: 12)
 
-    expect(product.sku_code).not_to be_empty
+    expect(product.sku_code).not_to eq nil
   end
 
   it 'SKU must have 20 characters' do
@@ -162,64 +162,43 @@ RSpec.describe ProductModel, type: :model do
     expect(product.sku_code.length).to be_equal 20
   end
 
-  context 'SKU must be unique' do
-    it 'SKU is duplicate' do 
-      supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
-        cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-      product1 = ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
-        weight: 200, width: 30, height: 5, length: 12)
-      product2 = ProductModel.new(name:'Teclado Digitador', supplier: supplier,
-        weight: 200, width: 30, height: 5, length: 12, sku_code: product1.sku_code)
-
-      expect(product2).not_to be_valid
-    end
-
-    it 'two products are created' do
-      supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
+  it 'SKU must be random' do 
+    supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
       cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-      product1 = ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
-        weight: 200, width: 30, height: 5, length: 12)
-      product2 = ProductModel.new(name:'Teclado Digitador', supplier: supplier,
-        weight: 200, width: 30, height: 5, length: 12)
+    product = ProductModel.new(name:'Teclado Digitador', supplier: supplier,
+      weight: 200, width: 30, height: 5, length: 12)
+    allow(SecureRandom).to receive(:alphanumeric).with(20).and_return '6BH0esFqq9gQaDGrYBjV'
 
-    expect(product1.sku_code).not_to be_equal product2.sku_code
-    end
+    product.save()
+
+    expect(product.sku_code).to eq '6BH0esFqq9gQaDGrYBjV'
   end
-  # it 'SKU must have 20 characters' do
-  #   it 'SKU has less than 20 characteres' do
-  #     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
-  #     cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-  #     product = ProductModel.new(name:'Teclado Digitador', supplier: supplier, sku_code: 'TCDD221212322ASD231',
-  #     weight: 200, width: 30, height: 5, length: 12)
-      
-  #     expect(product).not_to be_valid
-  #   end
 
-  #   it 'SKU has more than 20 characteres' do
-  #     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
-  #     cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-  #     product = ProductModel.new(name:'Teclado Digitador', supplier: supplier, sku_code: 'TCDDa2221212322ASD231',
-  #     weight: 200, width: 30, height: 5, length: 12)
-      
-  #     expect(product).not_to be_valid
-  #   end
+  it 'SKU must not change after an update' do
+    supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
+      cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
+    product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
+      weight: 200, width: 30, height: 5, length: 12)
+    sku = product.sku_code
 
-  #   it 'SKU has more than 20 characteres' do
-  #     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
-  #     cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-  #     product = ProductModel.new(name:'Teclado Digitador', supplier: supplier, sku_code: 'TCDDa2221212322ASD231',
-  #     weight: 200, width: 30, height: 5, length: 12)
-      
-  #     expect(product).not_to be_valid
-  #   end
+    product.update(name: 'Teclado Macio')
 
-  # end
-  # it 'sku code must be generated automatic' do
-  #   supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
-  #   cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-  #   product = ProductModel.new(name:'Teclado Digitador', supplier: supplier,
-  #   weight: 200, width: 30, height: 0, length: 12)
+    expect(product.name).to eq 'Teclado Macio'
+    expect(product.sku_code).to eq sku
+  end
 
-  #   expect(product.sku_code).not_to be_nil 
-  # end
+  it 'SKU must be unique' do
+    supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
+    cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
+    product1 = ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
+      weight: 200, width: 30, height: 5, length: 12)
+    sku = product1.sku_code
+
+    product2 = ProductModel.new(name:'Som Bacana', supplier: supplier,
+    weight: 400, width: 30, height: 32, length: 12)
+    allow(SecureRandom).to receive(:alphanumeric).with(20).and_return sku
+    product2.save
+
+    expect(product2).not_to be_valid
+  end
 end
