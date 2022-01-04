@@ -49,13 +49,14 @@ describe 'User register product model' do
     click_on 'Salvar'
 
     #assert
+    p = ProductModel.last
     expect(page).to have_content 'Produto cadastrado com sucesso!'
     expect(page).to have_content 'Caneca Star Wars'
     expect(page).to have_content '300 g'
     expect(page).to have_content 'Largura: 8 cm'
     expect(page).to have_content 'Altura: 12 cm'
     expect(page).to have_content 'Comprimento: 14 cm'
-    expect(page).to have_content 'SKU:'
+    expect(page).to have_content "SKU: #{p.sku_code}"
     expect(page).to have_content 'Fornecedor: Ceramicas Geek'
   end
 

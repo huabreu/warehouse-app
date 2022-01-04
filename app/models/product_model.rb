@@ -3,7 +3,7 @@ class ProductModel < ApplicationRecord
   has_many :product_bundle_items
   has_many :product_bundles, through: :product_bundle_items
 
-  before_create :generate_sku
+  before_validation :generate_sku
 
   validates :name, :weight, :height, :width, :length, 
   presence: true
