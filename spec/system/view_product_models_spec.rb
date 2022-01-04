@@ -5,11 +5,10 @@ describe 'Visitor visit list of product models' do
     supplier2 = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
     cnpj: '1234567811234', email: 'iippiiranga@hotmail.com')
     category = ProductCategory.create!(name: 'Super Produtos')
-
     p1 = ProductModel.create!(name:'Teclado Digitador', supplier: supplier1, product_category: category,
-                                 weight: 200, width: 30, height: 5, length: 12)
+                              weight: 200, width: 30, height: 5, length: 12)
     p2 = ProductModel.create!(name:'Som Muito Alto', supplier: supplier2, product_category: category, 
-                               weight: 500, width: 30, height: 20, length: 12)
+                              weight: 500, width: 30, height: 20, length: 12)
 
     visit root_path
     click_on 'Lista de produtos'
