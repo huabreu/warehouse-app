@@ -1,0 +1,10 @@
+<h1><%= @product_category.name %></h1>
+
+<dl>
+Produtos:
+<% @product_category.product_models.each do |p| %>
+  <li><%= p.name %></li>
+<% end %>
+</dl>
+
+<%= link_to 'Voltar', product_categories_path %>

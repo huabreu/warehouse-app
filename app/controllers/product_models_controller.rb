@@ -6,7 +6,7 @@ class ProductModelsController < ApplicationController
   end
 
   def create
-    product_model_params = params.require(:product_model).permit(:name, :supplier_id,
+    product_model_params = params.require(:product_model).permit(:name, :supplier_id, :product_category_id,
                                                                  :height, :width, :length, :weight)
     @product_model = product_model = ProductModel.new(product_model_params)
     if @product_model.save
@@ -32,7 +32,7 @@ class ProductModelsController < ApplicationController
 
   def update
     @product_model = ProductModel.find(params[:id])
-    @product_model.update(params.require(:product_model).permit(:name, :supplier_id,
+    @product_model.update(params.require(:product_model).permit(:name, :supplier_id, :product_category_id,
                                                                  :height, :width, :length, :weight))
     if @product_model.save()
       redirect_to @product_model, notice: 'Produto editado com sucesso!'

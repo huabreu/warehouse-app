@@ -23,6 +23,6 @@ describe 'visitor navigates' do
 
     expect(page).not_to have_link 'Cadastrar novo produto'
     expect(page).not_to have_link 'Cadastrar novo galpão'
-    expect(page).not_to have_link 'Cadastrar novo fonecedor'
+    expect(page).not_to have_link 'Cadastrar novo fornecedor'
   end
 end

@@ -12,3 +12,4 @@ pt-BR:
         height: "Altura"
         width: "Largura"
         length: "Comprimento"
+        product_category_id: 'Categoria'

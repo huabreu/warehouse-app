@@ -21,12 +21,13 @@ describe 'User view supplier details' do
       cnpj: '1134567818234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
     other_supplier = Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
       cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
+    category = ProductCategory.create!(name: 'Super Produtos')
 
-    p1 = ProductModel.create!(name:'Teclado Digitador', supplier: supplier, sku_code: 'TCDD2123212322ASD231',
+    p1 = ProductModel.create!(name:'Teclado Digitador', supplier: supplier, product_category: category,
       weight: 200, width: 30, height: 5, length: 12)
-    p2 = ProductModel.create!(name:'Som Muito Alto', supplier: supplier, sku_code: 'SMAA2123212322ASD231',
+    p2 = ProductModel.create!(name:'Som Muito Alto', supplier: supplier, product_category: category,
     weight: 500, width: 30, height: 20, length: 12)
-    p3 = ProductModel.create!(name:'Som Muito Baixo', supplier: other_supplier, sku_code: 'SMAB2123212322ASD231',
+    p3 = ProductModel.create!(name:'Som Muito Baixo', supplier: other_supplier, product_category: category,
     weight: 500, width: 30, height: 20, length: 12)
 
     visit suppliers_path

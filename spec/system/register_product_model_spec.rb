@@ -19,6 +19,7 @@ describe 'User register product model' do
 
     expect(page).to have_content 'Novo Produto'
     expect(page).to have_field 'Nome'
+    expect(page).to have_field 'Categoria'
     expect(page).to have_field 'Fornecedor'
     expect(page).to have_field 'Peso'
     expect(page).to have_field 'Altura'
@@ -33,6 +34,7 @@ describe 'User register product model' do
                      cnpj: 1234567891123, email: 'ceramicgeek@gmaial.com')
     Supplier.create!(trade_name: 'Imaginarium', company_name: 'Imaginarium SA', 
     cnpj: 1234547891123, email: 'imaginarium@gmaial.com')
+    category = ProductCategory.create!(name: 'Super Categoria') 
 
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
     #act
@@ -45,7 +47,7 @@ describe 'User register product model' do
     fill_in 'Largura', with: 8
     fill_in 'Comprimento', with: 14
     select 'Ceramicas Geek', from: 'Fornecedor'
-
+    select 'Super Categoria', from: 'Categoria'
     click_on 'Salvar'
 
     #assert
@@ -58,6 +60,7 @@ describe 'User register product model' do
     expect(page).to have_content 'Comprimento: 14 cm'
     expect(page).to have_content "SKU: #{p.sku_code}"
     expect(page).to have_content 'Fornecedor: Ceramicas Geek'
+    expect(page).to have_content 'Categoria: Super Categoria'
   end
 
   it 'without success' do

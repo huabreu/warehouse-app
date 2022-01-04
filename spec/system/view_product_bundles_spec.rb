@@ -24,9 +24,10 @@ describe 'Visitor visit list of product bundles' do
   it 'and view a specific product bundle' do
     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
     cnpj: '1234567811234', email: 'iippiiranga@hotmail.com')
-    model1 = ProductModel.create!(name:'Caixas de Som Blast', supplier: supplier, sku_code: 'CSXBB12321IPLO202111',
+    category = ProductCategory.create!(name: 'Teste')
+    model1 = ProductModel.create!(name:'Caixas de Som Blast', supplier: supplier, product_category: category,
     weight: 200, width: 30, height: 15, length: 12)
-    model2 = ProductModel.create!(name:'Som Muito Alto', supplier: supplier, sku_code: 'SMMAL12321IPLO202111',
+    model2 = ProductModel.create!(name:'Som Muito Alto', supplier: supplier, product_category: category,
     weight: 500, width: 30, height: 20, length: 12)
     ProductBundle.create!(name: 'Super Bundle', sku_code: 'KSUMEBU25122021123456', product_models: [model1, model2])
 

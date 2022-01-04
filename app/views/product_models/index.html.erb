@@ -6,7 +6,7 @@
   <% @product_models.each do |pm| %>
     <h3><%=link_to(pm.name, pm) %></h3>
     <li>SKU: <%= pm.sku_code %></li> 
-    <li>Fornecdor: <%= pm.supplier.trade_name %></li> 
+    <li>Fornecedor: <%= pm.supplier.trade_name %></li> 
     <li>Dimensões:<%= pm.dimensions %></li> 
   <% end %>
 <% end %>

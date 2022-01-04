@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_23_194558) do
+ActiveRecord::Schema.define(version: 2022_01_04_212111) do
 
   create_table "product_bundle_items", force: :cascade do |t|
     t.integer "product_model_id", null: false
@@ -28,6 +28,12 @@ ActiveRecord::Schema.define(version: 2021_12_23_194558) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "product_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "product_models", force: :cascade do |t|
     t.string "name"
     t.integer "weight"
@@ -38,6 +44,8 @@ ActiveRecord::Schema.define(version: 2021_12_23_194558) do
     t.integer "supplier_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "product_category_id", default: 0, null: false
+    t.index ["product_category_id"], name: "index_product_models_on_product_category_id"
     t.index ["supplier_id"], name: "index_product_models_on_supplier_id"
   end
 
@@ -80,5 +88,6 @@ ActiveRecord::Schema.define(version: 2021_12_23_194558) do
 
   add_foreign_key "product_bundle_items", "product_bundles"
   add_foreign_key "product_bundle_items", "product_models"
+  add_foreign_key "product_models", "product_categories"
   add_foreign_key "product_models", "suppliers"
 end

@@ -5,7 +5,8 @@ describe 'User edit a warehouse' do
     #arrange
     supplier = Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
     cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
-    product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
+    category = ProductCategory.create!(name: 'Eletrônicos Potentes')
+    product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier, product_category: category,
                                  weight: 200, width: 30, height: 5, length: 12)
     #act
     visit edit_product_model_path(product.id)
@@ -17,9 +18,10 @@ describe 'User edit a warehouse' do
   it 'throught a link on the product model page' do
     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
     cnpj: '1234567811234', email: 'iippiiranga@hotmail.com')
-    ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
+    category = ProductCategory.create!(name: 'Eletrônicos Potentes')
+    ProductModel.create!(name:'Teclado Digitador', supplier: supplier, product_category: category,
                                  weight: 200, width: 30, height: 5, length: 12)
-    ProductModel.create!(name:'Som Muito Alto', supplier: supplier,
+    ProductModel.create!(name:'Som Muito Alto', supplier: supplier, product_category: category,
                                weight: 500, width: 30, height: 20, length: 12)
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
     
@@ -43,7 +45,8 @@ describe 'User edit a warehouse' do
   it 'with success' do
     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
     cnpj: '1234567811234', email: 'iippiiranga@hotmail.com')
-    ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
+    category = ProductCategory.create!(name: 'Eletrônicos Potentes')
+    ProductModel.create!(name:'Teclado Digitador', supplier: supplier, product_category: category,
                                  weight: 200, width: 30, height: 5, length: 12)
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
     
@@ -73,7 +76,8 @@ describe 'User edit a warehouse' do
   it 'without success' do
     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
     cnpj: '1234567811234', email: 'iippiiranga@hotmail.com')
-    ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
+    category = ProductCategory.create!(name: 'Eletrônicos Potentes')
+    ProductModel.create!(name:'Teclado Digitador', supplier: supplier, product_category: category,
                                  weight: 200, width: 30, height: 5, length: 12)
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
     

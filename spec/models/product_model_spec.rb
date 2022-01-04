@@ -147,8 +147,9 @@ RSpec.describe ProductModel, type: :model do
   it 'SKU must be auto generated' do
     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
       cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-    product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
-      weight: 200, width: 30, height: 5, length: 12)
+    category = ProductCategory.create!(name: 'Eletrônicos Potentes')
+    product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier, 
+                        product_category: category, weight: 200, width: 30, height: 5, length: 12)
 
     expect(product.sku_code).not_to eq nil
   end
@@ -156,8 +157,9 @@ RSpec.describe ProductModel, type: :model do
   it 'SKU must have 20 characters' do
     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
       cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-    product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
-      weight: 200, width: 30, height: 5, length: 12)
+      category = ProductCategory.create!(name: 'Eletrônicos Potentes')
+      product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier, 
+                          product_category: category, weight: 200, width: 30, height: 5, length: 12)
 
     expect(product.sku_code.length).to be_equal 20
   end
@@ -165,8 +167,9 @@ RSpec.describe ProductModel, type: :model do
   it 'SKU must be random' do 
     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
       cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-    product = ProductModel.new(name:'Teclado Digitador', supplier: supplier,
-      weight: 200, width: 30, height: 5, length: 12)
+    category = ProductCategory.create!(name: 'Eletrônicos Potentes')
+    product = ProductModel.new(name:'Teclado Digitador', supplier: supplier, 
+                        product_category: category, weight: 200, width: 30, height: 5, length: 12)
     allow(SecureRandom).to receive(:alphanumeric).with(20).and_return '6BH0esFqq9gQaDGrYBjV'
 
     product.save()
@@ -177,8 +180,9 @@ RSpec.describe ProductModel, type: :model do
   it 'SKU must not change after an update' do
     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
       cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-    product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
-      weight: 200, width: 30, height: 5, length: 12)
+    category = ProductCategory.create!(name: 'Eletrônicos Potentes')
+    product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier, 
+                        product_category: category, weight: 200, width: 30, height: 5, length: 12)
     sku = product.sku_code
 
     product.update(name: 'Teclado Macio')
@@ -190,8 +194,9 @@ RSpec.describe ProductModel, type: :model do
   it 'SKU must be unique' do
     supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
     cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-    product1 = ProductModel.create!(name:'Teclado Digitador', supplier: supplier,
-      weight: 200, width: 30, height: 5, length: 12)
+    category = ProductCategory.create!(name: 'Eletrônicos Potentes')
+    product1 = ProductModel.create!(name:'Teclado Digitador', supplier: supplier, 
+                        product_category: category, weight: 200, width: 30, height: 5, length: 12)
     sku = product1.sku_code
 
     product2 = ProductModel.new(name:'Som Bacana', supplier: supplier,
