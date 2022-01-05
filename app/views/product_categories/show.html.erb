@@ -1,10 +1,15 @@
 <h1><%= @product_category.name %></h1>
 
-<dl>
-Produtos:
-<% @product_category.product_models.each do |p| %>
-  <li><%= p.name %></li>
-<% end %>
-</dl>
 
-<%= link_to 'Voltar', product_categories_path %>
+<h3>Modelos de Produto Cadastrados:</h3>
+<% if @product_category.product_models.empty? %>
+  Ainda não existem produtos cadastrados nessa categoria
+<% else %>
+  <dl>
+  <% @product_category.product_models.each do |p| %>
+    <li><%= p.name %></li>
+  <% end %>
+  </dl>
+<% end %>
+
+<br><br><%= link_to 'Voltar', product_categories_path %>

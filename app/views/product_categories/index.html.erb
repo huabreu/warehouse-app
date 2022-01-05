@@ -1,0 +1,9 @@
+<h1>Categorias de Produto Cadastradas</h1>
+
+<%if @product_category.empty? %>
+  Não existem categorias cadastradas no sistema
+<% else %>
+  <% @product_category.each do |pc| %>
+    <h3><%=link_to(pc.name, pc) %></h3>
+  <% end %>
+<% end %>

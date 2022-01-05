@@ -20,4 +20,8 @@ class ProductCategoriesController < ApplicationController
     id = params[:id]
     @product_category = ProductCategory.find(id)
   end
+
+  def index
+    @product_category = ProductCategory.all
+  end
 end

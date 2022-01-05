@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :suppliers,  only:     [:show, :new, :create, :index]
   resources :product_models, only: [:show, :new, :create, :index, :edit, :update]
   resources :product_bundles, only: [:show, :new, :create, :index]
-  resources :product_categories, only: [:show, :new, :create]
+  resources :product_categories, only: [:show, :new, :create, :index]
 end

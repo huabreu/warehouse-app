@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe 'Visitor visit list of product models' do
   it 'and view all registered products' do
     supplier1 = Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
