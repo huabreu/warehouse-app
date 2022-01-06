@@ -67,5 +67,28 @@ describe 'Visitor view product model details' do
         expect(page).to have_content 'Quantidade: 20'
       end
     end
+
+    # it 'but there is no product items registered yet' do
+    #   supplier = Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
+    #   cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
+    #   category = ProductCategory.create!(name: 'Super Produtos')
+    #   warehouse1 = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão no centro da cidade',
+    #   address: 'Av. Fernandes Lima', zip_code: '57050-000', city: 'Maceió', state: 'AL', 
+    #   total_area: 10000, useful_area: 8000)
+    #   warehouse2 =  Warehouse.create!(name: 'Curitiba', code: 'CTB', description: 'Ótimo galpão mas é frio',
+    #   address: 'Av Coritiba', city: 'Curitiba', state: 'PR', zip_code: '87050-000',
+    #   total_area: 5000, useful_area: 4000)
+    #   product_model1 = ProductModel.create!(name:'Teclado Digitador', supplier: supplier, product_category: category,
+    #                                weight: 200, width: 30, height: 5, length: 12)
+    #   product_model2 = ProductModel.create!(name:'Cuecas Descartáveis', supplier: supplier, product_category: category,
+    #   weight: 200, width: 30, height: 5, length: 12)
+
+    #   visit product_models_path
+    #   click_on 'Teclado Digitador'
+
+    #   expect(current_path).to eq product_model_path(product_model1.id)
+    #   expect(page).to have_css('h2', text: 'Itens')
+    #   expect(page).to have_content 'Não existem itens desse modelo em nenhum galpão no momento'
+    # end
   end
 end

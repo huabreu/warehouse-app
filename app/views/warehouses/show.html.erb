@@ -29,5 +29,33 @@
   </div>
 <% end %>
 
+<!-- <% @items = @warehouse.product_items.group(:product_model).count %>
+<% @items.each_pair do |product_model, quantity|%>
+
+  <div id="product-<%= product_model.id %>">
+    <%= product_model.name %>
+    Quantidade: <%= quantity %>
+  </div>
+<% end %> -->
+
+<h2>Entrade de Itens</h2>
+
+<%= form_with(url:  product_entry_warehouse_path(@warehouse.id)) do |form| %>
+  <!-- <% form.hidden_field :warehouse_id, value: @warehouse.id %> -->
+  <div>
+    <%= form.label :product_model_id, 'Produto' %>
+    <%= form.collection_select :product_model_id, @product_models, :id, :name, {include_blank: true} %>
+  </div>
+  <div>
+    <%= form.label :quantity, 'Quantidade' %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div>
+    <%= form.submit 'Confirmar' %>
+  </div>
+<% end %>
+
+
 
 

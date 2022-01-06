@@ -5,6 +5,7 @@ class WarehousesController < ApplicationController
     id = params[:id]
     @warehouse = Warehouse.find(id)
     @items = @warehouse.product_items.group(:product_model_id).count
+    @product_models = ProductModel.all
   end
   
   def new
@@ -13,7 +14,7 @@ class WarehousesController < ApplicationController
 
   def create
     warehouse_params = params.require(:warehouse).permit(:name, :code, :address, :city, :state, :zip_code,
-                                                          :description, :useful_area, :total_area) 
+                                                         :description, :useful_area, :total_area) 
     @warehouse = Warehouse.new(warehouse_params)
     if @warehouse.save()
     # flash[:notice] = 'Galpão cadastrado com sucesso!'
@@ -38,5 +39,20 @@ class WarehousesController < ApplicationController
       flash.now[:alert] = 'Erro! Não foi possível editar o galpão!'
       render 'edit'
     end
+  end
+
+  def product_entry
+    quantity = params[:quantity].to_i
+    warehouse_id = params[:id]
+    product_model_id = params[:product_model_id]
+
+    warehouse = Warehouse.find(warehouse_id)
+    product_model = ProductModel.find(product_model_id)
+
+    quantity.times do
+      ProductItem.create(warehouse: warehouse, product_model: product_model)
+    end
+    
+    redirect_to warehouse
   end
 end
