@@ -31,25 +31,4 @@ describe 'Visitor visit list of product models' do
     expect(page).to have_css 'h1', text: 'Produtos Cadastrados'
     expect(page).to have_content 'Não existem produtos cadastrados no sistema'
   end
-
-  it 'and view a specific product model' do
-    supplier1 = Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
-    cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
-    category = ProductCategory.create!(name: 'Super Produtos')
-    p = ProductModel.create!(name:'Teclado Digitador', supplier: supplier1, product_category: category,
-                                 weight: 200, width: 30, height: 5, length: 12)
-
-    visit product_models_path
-    click_on 'Teclado Digitador'
-
-    expect(page).to have_content 'Teclado Digitador'
-    expect(page).to have_content 'Categoria: Super Produtos'
-    expect(page).to have_content 'Fornecedor: Fornecedor Bonito'
-    expect(page).to have_content "SKU: #{p.sku_code}"
-    expect(page).to have_content 'Peso: 200 g'
-    expect(page).to have_content 'Largura: 30 cm'
-    expect(page).to have_content 'Altura: 5 cm'
-    expect(page).to have_content 'Comprimento: 12 cm'
-
-  end
 end

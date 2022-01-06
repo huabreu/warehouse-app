@@ -20,3 +20,14 @@
   <%= link_to 'Voltar', root_path %>
 </nav>
 
+<h2>Estoque:</h2>
+
+<% @items.each_pair do |id, quantity| %>
+  <div id="product-<%= id %>">
+    <%= ProductModel.find(id).name %>
+    Quantidade: <%= quantity %>
+  </div>
+<% end %>
+
+
+

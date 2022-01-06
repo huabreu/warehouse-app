@@ -20,6 +20,7 @@ class ProductModelsController < ApplicationController
   def show
     id = params[:id]
     @product_model = ProductModel.find(id)
+    @items = @product_model.product_items.group(:warehouse_id).count
   end
 
   def index

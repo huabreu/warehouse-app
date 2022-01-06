@@ -8,6 +8,7 @@ class ProductBundlesController < ApplicationController
 
   def new
     @product_bundle = ProductBundle.new
+    @product_models = ProductModel.all
   end
 
   def create

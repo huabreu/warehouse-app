@@ -1,4 +1,4 @@
-<% if product_bundle.errors.any?%>
+<% if @product_bundle.errors.any?%>
   <span>Verifique os seguintes erros:</span>
   <ul>
   <% @product_bundle.errors.full_messages.each do |msg| %>
@@ -7,7 +7,7 @@
   </ul>
 <% end %>
 
-<%= form_with(model: product_bundle) do |form| %>
+<%= form_with(model: @product_bundle) do |form| %>
   <div>
     <%= form.label :name  %>
     <%= form.text_field(:name) %>
