@@ -1,9 +1,14 @@
 <h1>Galpões Encontrados</h1>
-<ul>
-  <% @warehouses.each do |warehouse| %>
-  <li>
-    <%= link_to("#{warehouse.name}", warehouse_path(warehouse.id)) %>
-    <%= " (#{warehouse.code}) | Localização: #{warehouse.city} - #{warehouse.state}" %>
-  </li>
+
+  <% if @warehouses.empty? %>
+    Não existem galpões cadastrados correspondentes. Cadastre um novo galpão ou busque por outros termos.
+  <% else %>
+    <ul>
+      <% @warehouses.each do |warehouse| %>
+      <li>
+        <%= link_to("#{warehouse.name}", warehouse_path(warehouse.id)) %>
+        <%= " (#{warehouse.code}) | Localização: #{warehouse.city} - #{warehouse.state}" %>
+      </li>
+      <% end %>
+    </ul>
   <% end %>
-</ul>
