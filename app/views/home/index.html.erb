@@ -8,6 +8,15 @@
 <%= link_to('Lista de bundles', product_bundles_path) %>
 
 <h2>Galpões Cadastrados</h2>
+<nav>
+  <%= form_with url: search_warehouses_path, method: :get do %>
+  <%= label_tag :query, 'Busca:' %>
+  <%= text_field_tag :query %>
+  <%= submit_tag 'Pesquisar' %>
+  <% end %>
+</nav><br>
+
+
 <% @warehouses.each do |w| %>
   <li>
     <%= link_to(w.name, warehouse_path(w.id)) %>
