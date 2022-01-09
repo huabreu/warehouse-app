@@ -44,6 +44,10 @@
     <%= form.label :useful_area %>
     <%= form.number_field(:useful_area) %>
   </div>
+  <div>
+    <span>Categorias de produtos:</span>
+    <%= form.collection_check_boxes :product_category_ids, ProductCategory.all, :id, :name %>
+  </div>
   <%= form.submit 'Salvar' %>
 
 <% end %>

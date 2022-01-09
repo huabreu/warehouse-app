@@ -23,9 +23,8 @@ describe 'Visitor searchs warehouse' do
       expect(page).to have_content('Localização: Maceió - AL')
       expect(page).to have_content('Lomaco (LMC)')
       expect(page).to have_content('Localização: Juiz de Fora - MG')
-      expect(page).not_to have_content('Curitiba')
-      expect(page).not_to have_content('CTB')
-      expect(page).not_to have_content('PR')
+      expect(page).not_to have_content('Curitiba (CTB)')
+      expect(page).not_to have_content('Curitiba - PR')
     end
 
     it 'without success' do 
@@ -42,7 +41,7 @@ describe 'Visitor searchs warehouse' do
 
       expect(current_path).to eq search_warehouses_path
       expect(page).to have_css('h1', text: 'Galpões Encontrados')
-      expect(page).to have_content('Não existem galpões cadastrados correspondentes. Cadastre um novo galpão ou busque por outros termos.')
+      expect(page).to have_content('Nenhum resultado encontrado')
       expect(page).not_to have_content('Maceió (MCZ)')
       expect(page).not_to have_content('Localização: Maceió - AL')
       expect(page).not_to have_content('Lomaco (LMC)')

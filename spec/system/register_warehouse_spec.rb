@@ -32,12 +32,16 @@ describe 'user register warehouse' do
     expect(page).to have_field 'CEP'
     expect(page).to have_field 'Área Total'
     expect(page).to have_field 'Área Útil'
+    expect(page).to have_content 'Categorias de produtos:' 
     expect(page).to have_button 'Salvar'
   end
 
   it 'with success' do
     #arrange
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
+    c1 = ProductCategory.create!(name: 'Eletrônicos')
+    c2 = ProductCategory.create!(name: 'Frios')
+    c3 = ProductCategory.create!(name: 'Cosméticos')
     #act
     login_as(user)
     visit root_path
@@ -51,10 +55,12 @@ describe 'user register warehouse' do
     fill_in 'CEP', with: '36014-520'
     fill_in 'Área Total', with: '20000'
     fill_in 'Área Útil', with: '15000'
-    
+    check 'Eletrônicos'
+    check 'Cosméticos'
     click_on 'Salvar'
     
     #assert
+    expect(page).to have_content('Galpão cadastrado com sucesso!')
     expect(page).to have_content('Juiz de Fora')
     expect(page).to have_content('JDF')
     expect(page).to have_content('Lindo galpão a beira mar')
@@ -63,8 +69,9 @@ describe 'user register warehouse' do
     expect(page).to have_content('CEP: 36014-520')
     expect(page).to have_content('Área Total: 20000 m2')
     expect(page).to have_content('Área Útil: 15000 m2')
-
-    expect(page).to have_content('Galpão cadastrado com sucesso!')
+    expect(page).to have_content('Eletrônicos')
+    expect(page).to have_content('Cosméticos')
+    expect(page).not_to have_content('Frios')
   end
 
   it 'without success' do

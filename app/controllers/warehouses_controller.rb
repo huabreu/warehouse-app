@@ -13,8 +13,8 @@ class WarehousesController < ApplicationController
   end
 
   def create
-    warehouse_params = params.require(:warehouse).permit(:name, :code, :address, :city, :state, :zip_code,
-                                                         :description, :useful_area, :total_area) 
+    warehouse_params = params.require(:warehouse).permit(:name, :code, :address, :city, :state, 
+    :zip_code, :description, :useful_area, :total_area, product_category_ids: []) 
     @warehouse = Warehouse.new(warehouse_params)
     if @warehouse.save()
     # flash[:notice] = 'Galpão cadastrado com sucesso!'
@@ -32,7 +32,7 @@ class WarehousesController < ApplicationController
   def update
     @warehouse = Warehouse.find(params[:id])
     @warehouse.update(params.require(:warehouse).permit(:name, :code, :address, :city, :state, :zip_code,
-    :description, :useful_area, :total_area))
+    :description, :useful_area, :total_area, product_category_ids: []))
     if @warehouse.save()
       redirect_to @warehouse, notice: 'Galpão editado com sucesso!'
     else

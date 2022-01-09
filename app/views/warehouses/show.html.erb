@@ -15,7 +15,14 @@
   <dd><%= @warehouse.useful_area %> m2</dd>
 </dl>
 
-<nav>
+<h4>Categorias Disponíveis:</h4>
+<dd>
+<% @warehouse.product_categories.each do |pc| %>
+    <li><%= link_to "#{pc.name}", product_category_path  %></li>
+<% end %>
+</dd>
+
+<br><nav>
   <%= link_to 'Editar', edit_warehouse_path(@warehouse) %>
   <%= link_to 'Voltar', root_path %>
 </nav>

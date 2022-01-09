@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   resources :product_models, only: [:show, :new, :create, :index, :edit, :update]
   resources :product_bundles, only: [:show, :new, :create, :index]
   resources :product_categories, only: [:show, :new, :create, :index]
+
   get 'product_items/entry', to: 'product_items#new_entry'
   post 'product_items/entry', to: 'product_items#process_entry'
+
+  namespace :api, defaults: { format: 'json'} do
+    resources :warehouses, only: [:index]
+  end  
 end
