@@ -12,4 +12,15 @@
   </dl>
 <% end %>
 
+<h3>Galpões Disponíveis:</h3>
+<% if @product_category.warehouses.empty? %>
+  Ainda não existem galpões disponíveis para essa categoria de produtos
+<% else %>
+  <dl>
+  <% @product_category.warehouses.each do |w| %>
+    <li><%= "#{w.name} (#{w.code})" %></li>
+  <% end %>
+  </dl>
+<% end %>
+
 <br><br><%= link_to 'Voltar', product_categories_path %>

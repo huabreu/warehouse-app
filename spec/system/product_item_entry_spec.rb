@@ -36,6 +36,12 @@ describe 'User enters new items' do
         expect(page).to have_content 'Quantidade: 100'
       end
     end
+
+    # context 'without success' do
+    #   it 'because invalid product category' do
+        
+    #   end
+    # end
   end
 
   context 'through form on warehouse details page' do
