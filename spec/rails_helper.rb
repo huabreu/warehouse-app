@@ -70,4 +70,5 @@ RSpec.configure do |config|
   config.filter_gems_from_backtrace("capybara")
   config.filter_gems_from_backtrace("rails")
   config.filter_gems_from_backtrace("bootsnap")
+  config.filter_gems_from_backtrace("warden")
 end
