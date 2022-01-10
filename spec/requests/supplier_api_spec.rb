@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Warehouse API' do
-  context 'GET /api/v1/warehouses' do
+describe 'Supplier API' do
+  context 'GET /api/v1/suppliers' do
     it 'successfully' do
       # arrange
       Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
@@ -59,10 +59,10 @@ describe 'Warehouse API' do
       expect(parsed_response.keys).not_to include "updated_at"
     end
 
-  #   it 'warehouse do not exist' do
-  #     get "/api/v1/warehouses/9999"
+    it 'supplier do not exist' do
+      get "/api/v1/suppliers/9999"
 
-  #     expect(response.status).to eq 404
-  #   end
+      expect(response.status).to eq 404
+    end
   end
 end
