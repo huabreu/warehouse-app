@@ -27,6 +27,4 @@ class ProductModel < ApplicationRecord
       self.sku_code = SecureRandom.alphanumeric(20) 
     end
   end
-
-
 end

@@ -8,6 +8,7 @@ class ProductEntry
   end
 
   def process
+    # return false unless valid?
     warehouse = Warehouse.find(warehouse_id)
     product_model = ProductModel.find(product_model_id)
 
@@ -19,4 +20,9 @@ class ProductEntry
       end
     end
   end
+
+  # private
+
+  # def valid?
+  # end
 end
