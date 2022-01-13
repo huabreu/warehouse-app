@@ -32,7 +32,8 @@ describe 'User deletes a warehouse' do
   #   expect(page).to have_link 'Excluir'
   # end
 
-  it 'with success' do
+  
+  it 'with success', js:true do
     warehouse = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão no centro da cidade',
     address: 'Av. Fernandes Lima', zip_code: '57050-000', city: 'Maceió', state: 'AL', 
     total_area: 10000, useful_area: 8000)
@@ -42,9 +43,7 @@ describe 'User deletes a warehouse' do
     visit root_path
     click_on 'Maceió'
     click_on 'Excluir'
-    # accept_confirm do
-    #   click_link 'Excluir'
-    # end
+    page.evaluate_script('window.confirm = function() { return true; }')
 
     expect(current_path).to eq root_path
     expect(page).to have_content('Galpão excluído com sucesso!')
