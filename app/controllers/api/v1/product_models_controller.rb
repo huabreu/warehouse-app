@@ -5,13 +5,9 @@ class Api::V1::ProductModelsController < Api::V1::ApiController
   end
 
   def show
-    begin
-      pm = ProductModel.find(params[:id])
-      render json: pm.as_json(except: [:created_at, :updated_at, :supplier_id, :product_category_id], 
-                              include: { supplier: { except: [:created_at, :updated_at]}, 
-                              product_category: { except: [:created_at, :updated_at]} } ), status: 200
-    rescue ActiveRecord::RecordNotFound
-      render json: {}, status: 404
-    end
+    pm = ProductModel.find(params[:id])
+    render json: pm.as_json(except: [:created_at, :updated_at, :supplier_id, :product_category_id], 
+                            include: { supplier: { except: [:created_at, :updated_at]}, 
+                            product_category: { except: [:created_at, :updated_at]} } ), status: 200
   end
 end

@@ -46,6 +46,16 @@ class WarehousesController < ApplicationController
                   "%#{params[:query]}%", "%#{params[:query]}%")
   end
 
+  def destroy
+    warehouse = Warehouse.find(params[:id]) 
+    if warehouse.destroy()
+      redirect_to root_path, notice: 'Galpão excluído com sucesso!'
+    else
+      flash.now[:alert] = 'Erro! Não foi possível excluír o galpão!'
+      render 'show'
+    end
+  end
+
   def product_entry
     quantity = params[:quantity].to_i
     warehouse_id = params[:id]

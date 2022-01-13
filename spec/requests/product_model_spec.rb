@@ -49,7 +49,7 @@ describe 'Product Model API' do
   end
 
   context 'GET /api/v1/product_models/:id' do
-    it 'successfully' do
+    it 'successfully - 200' do
       category = ProductCategory.create!(name: 'Laticínios')
       s = Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
       cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
@@ -79,10 +79,40 @@ describe 'Product Model API' do
       expect(parsed_response.keys).not_to include "product_category_id"
     end
 
-    it 'product models do not exist' do
+    it 'product model not found - 404' do
       get "/api/v1/product_models/9999"
 
       expect(response.status).to eq 404
+      expect(response.content_type).to include('application/json')
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Objeto não encontrado'
+    end
+
+    it 'invalid parameter - 412' do
+      allow(ProductModel).to receive(:find).with(-1.to_s).and_raise ActiveRecord::StatementInvalid
+
+      get "/api/v1/product_models/-1"
+
+      expect(response.status).to eq 412
+      expect(response.content_type).to include('application/json')
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Parâmetro inválido'
+    end
+
+    it 'database error - 500' do
+      c = ProductCategory.create!(name: 'Laticínios')
+      s = Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
+      cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
+      pm = ProductModel.create!(name:'Teclado Digitador', supplier: s, product_category: c,
+      weight: 200, width: 30, height: 5, length: 12)
+      allow(ProductModel).to receive(:find).with(pm.id.to_s).and_raise ActiveRecord::ConnectionNotEstablished
+
+      get "/api/v1/product_models/#{pm.id}"
+
+      expect(response.status).to eq 500
+      expect(response.content_type).to include('application/json')
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Erro ao estabelecer uma conexão com o banco de dados'
     end
   end
 end

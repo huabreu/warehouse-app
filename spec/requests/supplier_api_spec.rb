@@ -63,6 +63,81 @@ describe 'Supplier API' do
       get "/api/v1/suppliers/9999"
 
       expect(response.status).to eq 404
+      expect(response.content_type).to include('application/json')
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Objeto não encontrado'
+    end
+  end
+
+  context 'POST /api/v1/suppliers' do
+    it 'successfully' do
+      # arrange
+
+      # act
+      headers = { "CONTENT_TYPE" => "application/json" }
+      post '/api/v1/suppliers', params: '{ "trade_name": "Pinguitinga Express",
+                                           "company_name": "Pinguitinga Express SA",
+                                           "cnpj": "1222267891234",
+                                           "address": "Avenida dos Galpões, 1000",
+                                           "email": "pinquix@gmail.com",
+                                           "phone": "3433984521" }',
+                                  headers: headers
+      # assert
+      expect(response.status).to eq 201
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["trade_name"]).to eq 'Pinguitinga Express'
+      expect(parsed_response["company_name"]).to eq 'Pinguitinga Express SA'
+      expect(parsed_response["cnpj"]).to eq '1222267891234'
+      expect(parsed_response["address"]).to eq 'Avenida dos Galpões, 1000'
+      expect(parsed_response["email"]).to eq 'pinquix@gmail.com'
+      expect(parsed_response["phone"]).to eq '3433984521'
+      expect(parsed_response["id"]).to be_a_kind_of(Integer)
+    end
+
+    it 'has mandatory fields' do
+      headers = { "CONTENT_TYPE" => "application/json" }
+      post '/api/v1/suppliers', params: '{ }',
+                                 headers: headers
+
+      expect(response.status).to eq 422
+      expect(response.body).to include "Nome Fantasia não pode ficar em branco"
+      expect(response.body).to include "Razão Social não pode ficar em branco"
+      expect(response.body).to include "CNPJ não pode ficar em branco"
+      expect(response.body).to include "E-mail não pode ficar em branco"
+    end
+
+    it 'cnpj is not unique' do
+      Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
+      cnpj: '1222267891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
+
+      headers = { "CONTENT_TYPE" => "application/json" }
+      post '/api/v1/suppliers', params: '{ "trade_name": "Pinguitinga Express",
+                                           "company_name": "Pinguitinga Express SA",
+                                           "cnpj": "1222267891234",
+                                           "address": "Avenida dos Galpões, 1000",
+                                           "email": "pinquix@gmail.com",
+                                           "phone": "3433984521" }',
+                                  headers: headers
+
+      expect(response.status).to eq 422
+      expect(response.body).to include "CNPJ já está em uso"
+    end
+
+    it 'database error - 500' do
+      headers = { "CONTENT_TYPE" => "application/json" }
+      post '/api/v1/suppliers', params: '{ "trade_name": "Pinguitinga Express",
+                                           "company_name": "Pinguitinga Express SA",
+                                           "cnpj": "1222267891234",
+                                           "address": "Avenida dos Galpões, 1000",
+                                           "email": "pinquix@gmail.com",
+                                           "phone": "3433984521" }',
+                                  headers: headers
+      allow(Supplier).to receive(:create).and_raise ActiveRecord::ConnectionNotEstablished
+
+      expect(response.status).to eq 500
+      expect(response.content_type).to include('application/json')
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Erro ao estabelecer uma conexão com o banco de dados'
     end
   end
 end

@@ -5,11 +5,17 @@ class Api::V1::SuppliersController < Api::V1::ApiController
   end
 
   def show
-    begin
-      s = Supplier.find(params[:id])
-      render json: s.as_json(except: [:created_at, :updated_at]), status: 200
-    rescue ActiveRecord::RecordNotFound
-      render json: {}, status: 404
+    s = Supplier.find(params[:id])
+    render json: s.as_json(except: [:created_at, :updated_at]), status: 200
+  end
+
+  def create
+    supplier_params = params.permit(:trade_name, :company_name, :cnpj, :address, :email, :phone)
+    s = Supplier.new(supplier_params)
+    if s.save
+      render json: s, status: 201
+    else
+      render json: s.errors.full_messages, status: 422
     end
   end
 end

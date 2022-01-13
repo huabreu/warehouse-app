@@ -19,7 +19,8 @@ describe 'visitor view a warehouse' do
     expect(page).to have_content('Maceió/AL')
     expect(page).to have_content('Área Total: 10000 m2')
     expect(page).to have_content('Área Útil: 8000 m2')
-    #expect(page).to have_link('Voltar', href: root_path)
+    expect(page).to have_link ('Excluir')
+    expect(page).to have_link('Voltar', href: root_path)
   end
 
   it 'and comeback to homepage' do

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
-  resources :warehouses, only: [:show, :new, :create, :edit, :update] do
+  resources :warehouses, only: [:show, :new, :create, :edit, :update, :destroy] do
     post 'product_entry', on: :member
     get 'search', on: :collection
   end
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json} do
     namespace :v1 do
       resources :warehouses, only: [:index, :show, :create]
-      resources :suppliers, only: [:index, :show]
+      resources :suppliers, only: [:index, :show, :create]
       resources :product_models, only: [:index, :show]
     end
   end  

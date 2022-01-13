@@ -24,7 +24,8 @@
 
 <br><nav>
   <%= link_to 'Editar', edit_warehouse_path(@warehouse) %>
-  <%= link_to 'Voltar', root_path %>
+  <%= link_to 'Excluir', warehouse_path(@warehouse), method: :delete,
+      data: { confirm: 'Tem certeza que deseja excluir este galpão?' } %>
 </nav>
 
 <h2>Estoque:</h2>
@@ -62,6 +63,10 @@
     <%= form.submit 'Confirmar' %>
   </div>
 <% end %>
+
+<nav>
+  <br><%= link_to 'Voltar', root_path %>
+</nav>
 
 
 
