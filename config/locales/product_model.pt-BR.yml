@@ -13,3 +13,4 @@ pt-BR:
         width: "Largura"
         length: "Comprimento"
         product_category_id: 'Categoria'
+        product_category: 'Categoria'

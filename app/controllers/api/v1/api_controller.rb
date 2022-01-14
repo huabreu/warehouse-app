@@ -18,8 +18,9 @@ class Api::V1::ApiController < ActionController::API
     render json: {"error": "Parâmetro inválido"}, status: 412
   end
 
-  # def error_422
-  # end
+  def error_422(object)
+    render json: object.errors.full_messages, status: 422
+  end
 
   def error_500
     render json: {"error": "Erro ao estabelecer uma conexão com o banco de dados"}, status: 500

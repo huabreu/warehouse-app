@@ -43,7 +43,6 @@ describe 'User deletes a warehouse' do
     visit root_path
     click_on 'Maceió'
     click_on 'Excluir'
-    page.evaluate_script('window.confirm = function() { return true; }')
 
     expect(current_path).to eq root_path
     expect(page).to have_content('Galpão excluído com sucesso!')

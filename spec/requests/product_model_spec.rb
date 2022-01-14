@@ -115,4 +115,76 @@ describe 'Product Model API' do
       expect(parsed_response["error"]).to eq 'Erro ao estabelecer uma conexão com o banco de dados'
     end
   end
+
+  context 'POST /api/v1/product_models' do
+    it 'successfully' do
+      # arrange
+      ProductCategory.create!(name: 'Laticínios')
+      Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
+      cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
+      # act
+      headers = { "CONTENT_TYPE" => "application/json" }
+      post '/api/v1/product_models', params: '{ "name": "Ovo Gigante",
+                                                "weight": 17,
+                                                "height": "1",
+                                                "width": 1,
+                                                "length": 1,
+                                                "supplier_id": 1,
+                                                "product_category_id": 1
+                                                }',
+                                  headers: headers
+      # assert
+      expect(response.status).to eq 201
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["name"]).to eq 'Ovo Gigante'
+      expect(parsed_response["weight"]).to eq 17
+      expect(parsed_response["height"]).to eq 1
+      expect(parsed_response["width"]).to eq 1
+      expect(parsed_response["length"]).to eq 1
+      expect(parsed_response["supplier_id"]).to eq 1
+      expect(parsed_response["product_category_id"]).to eq 1
+      expect(parsed_response["id"]).to be_a_kind_of(Integer)
+      expect(parsed_response.keys).not_to include "created_at"
+      expect(parsed_response.keys).not_to include "updated_at"
+    end
+
+    it 'has mandatory fields' do
+      headers = { "CONTENT_TYPE" => "application/json" }
+      post '/api/v1/product_models', params: '{ }',
+                                     headers: headers
+
+      expect(response.status).to eq 422
+      expect(response.body).to include "Nome não pode ficar em branco"
+      expect(response.body).to include "Fornecedor é obrigatório(a)"
+      expect(response.body).to include "Categoria é obrigatório(a)"
+      expect(response.body).to include "Peso não pode ficar em branco"
+      expect(response.body).to include "Altura não pode ficar em branco"
+      expect(response.body).to include "Largura não pode ficar em branco"
+      expect(response.body).to include "Comprimento não pode ficar em branco"
+    end
+
+    # it 'database error - 500' do
+    #   ProductCategory.create!(name: 'Laticínios')
+    #   Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
+    #   cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
+      
+    #   allow(ProductModel).to receive(:new).and_raise ActiveRecord::ConnectionNotEstablished
+
+    #   headers = { "CONTENT_TYPE" => "application/json" }
+    #   post '/api/v1/product_models', params: '{ "name": "Ovo Gigante",
+    #                                             "weight": 17,
+    #                                             "height": "1",
+    #                                             "width": 1,
+    #                                             "length": 1,
+                                                
+    #                                             "product_category_id": 1
+    #                                             }',
+    #                               headers: headers
+
+    #   expect(response.status).to eq 500
+    #   expect(response.content_type).to include('application/json')
+    #   parsed_response = JSON.parse(response.body)
+    #   expect(parsed_response["error"]).to eq 'Erro ao estabelecer uma conexão com o banco de dados'
+    # end
+  end
 end

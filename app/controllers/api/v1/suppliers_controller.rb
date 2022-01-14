@@ -13,7 +13,7 @@ class Api::V1::SuppliersController < Api::V1::ApiController
     supplier_params = params.permit(:trade_name, :company_name, :cnpj, :address, :email, :phone)
     s = Supplier.new(supplier_params)
     if s.save
-      render json: s, status: 201
+      render json: s.as_json(except: [:created_at, :updated_at]), status: 201
     else
       render json: s.errors.full_messages, status: 422
     end

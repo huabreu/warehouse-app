@@ -45,26 +45,21 @@ RSpec.describe ProductItem, type: :model do
 
       expect(product2).not_to be_valid
     end
+  end
 
-    # it 'must not change after an update' do
-    #   w1 = Warehouse.new(name: 'Curitiba', code: 'MCZ', description: 'Ótimo galpão mas é frio',
-    #   address: 'Av Coritiba', city: 'Curitiba', state: 'PR', zip_code: '87050-000',
-    #   total_area: 5000, useful_area: 4000)
-    #   w2 = Warehouse.new(name: 'Cobilo', code: 'MCZ', description: 'Ótimo galpão mas é frio',
-    #   address: 'Av Coritiba', city: 'Curitiba', state: 'PR', zip_code: '87050-000',
-    #   total_area: 5000, useful_area: 4000)
-    #   supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
-    #     cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
-    #   category = ProductCategory.create!(name: 'Eletrônicos Potentes')
-    #   product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier, 
-    #                       product_category: category, weight: 200, width: 30, height: 5, length: 12)
-    #   pi = ProductItem.create!(warehouse: w1, product_model: product)
-    #   sku = pi.sku_code
+  context 'Quantity' do
+    it 'can not be negative' do
+      warehouse = Warehouse.new(name: 'Curitiba', code: 'MCZ', description: 'Ótimo galpão mas é frio',
+      address: 'Av Coritiba', city: 'Curitiba', state: 'PR', zip_code: '87050-000',
+      total_area: 5000, useful_area: 4000)
+      supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
+        cnpj: '1234567891234', email: 'iippiiranga@hotmail.com')
+      category = ProductCategory.create!(name: 'Eletrônicos Potentes')
+      product = ProductModel.create!(name:'Teclado Digitador', supplier: supplier, 
+                          product_category: category, weight: 200, width: 30, height: 5, length: 12)
+      pi = ProductItem.create!(warehouse: warehouse, product_model: product, quantity: -2)
 
-    #   pi.update(warehouse: w2)
-
-    #   expect(p1.warehouse).to be w2
-    #   expect(product.sku_code).to eq sku
-    # end
+      expect(pi.sku_code.length).not_to be_valid
+    end
   end
 end

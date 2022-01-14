@@ -15,7 +15,7 @@ class Api::V1::WarehousesController < Api::V1::ApiController
     if w.save
       render json: w, status: 201
     else
-      render json: w.errors.full_messages, status: 422
+      error_422(w)
     end
   end
 end
