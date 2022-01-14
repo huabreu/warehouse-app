@@ -21,8 +21,10 @@ class ProductEntry
     end
   end
 
-  # private
+  private
 
   # def valid?
+  #   @quantity > 0;
+  #   warehouse.product_categories.include?(product_model.product_category)
   # end
 end
