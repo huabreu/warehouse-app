@@ -125,22 +125,22 @@ describe 'Supplier API' do
       expect(response.body).to include "CNPJ já está em uso"
     end
 
-    # it 'database error - 500' do
-    #   allow(Supplier).to receive(:new).and_raise ActiveRecord::ConnectionNotEstablished
+    it 'database error - 500' do
+      allow(Supplier).to receive(:new).and_raise ActiveRecord::ConnectionNotEstablished
 
-    #   headers = { "CONTENT_TYPE" => "application/json" }
-    #   post '/api/v1/suppliers', params: '{ "trade_name": "Pinguitinga Express",
-    #                                        "company_name": "Pinguitinga Express SA",
-    #                                        "cnpj": "1222267891234",
-    #                                        "address": "Avenida dos Galpões, 1000",
-    #                                        "email": "pinquix@gmail.com",
-    #                                        "phone": "3433984521" }',
-    #                               headers: headers
+      headers = { "CONTENT_TYPE" => "application/json" }
+      post '/api/v1/suppliers', params: '{ "trade_name": "Pinguitinga Express",
+                                           "company_name": "Pinguitinga Express SA",
+                                           "cnpj": "1222267891234",
+                                           "address": "Avenida dos Galpões, 1000",
+                                           "email": "pinquix@gmail.com",
+                                           "phone": "3433984521" }',
+                                  headers: headers
 
-    #   expect(response.status).to eq 500
-    #   expect(response.content_type).to include('application/json')
-    #   parsed_response = JSON.parse(response.body)
-    #   expect(parsed_response["error"]).to eq 'Erro ao estabelecer uma conexão com o banco de dados'
-    # end
+      expect(response.status).to eq 500
+      expect(response.content_type).to include('application/json')
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Erro ao estabelecer uma conexão com o banco de dados'
+    end
   end
 end

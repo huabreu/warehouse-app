@@ -163,28 +163,28 @@ describe 'Product Model API' do
       expect(response.body).to include "Comprimento não pode ficar em branco"
     end
 
-    # it 'database error - 500' do
-    #   ProductCategory.create!(name: 'Laticínios')
-    #   Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
-    #   cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
-      
-    #   allow(ProductModel).to receive(:new).and_raise ActiveRecord::ConnectionNotEstablished
+    it 'database error - 500' do
+      allow(ProductModel).to receive(:new).and_raise ActiveRecord::ConnectionNotEstablished
 
-    #   headers = { "CONTENT_TYPE" => "application/json" }
-    #   post '/api/v1/product_models', params: '{ "name": "Ovo Gigante",
-    #                                             "weight": 17,
-    #                                             "height": "1",
-    #                                             "width": 1,
-    #                                             "length": 1,
+      ProductCategory.create!(name: 'Laticínios')
+      Supplier.create!(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
+      cnpj: '1234567891234', address: 'Rua Formosa', email: 'fbonito@hotmail.com', phone: '32156589')
+
+      headers = { "CONTENT_TYPE" => "application/json" }
+      post '/api/v1/product_models', params: '{ "name": "Ovo Gigante",
+                                                "weight": 17,
+                                                "height": "1",
+                                                "width": 1,
+                                                "length": 1,
                                                 
-    #                                             "product_category_id": 1
-    #                                             }',
-    #                               headers: headers
+                                                "product_category_id": 1
+                                                }',
+                                  headers: headers
 
-    #   expect(response.status).to eq 500
-    #   expect(response.content_type).to include('application/json')
-    #   parsed_response = JSON.parse(response.body)
-    #   expect(parsed_response["error"]).to eq 'Erro ao estabelecer uma conexão com o banco de dados'
-    # end
+      expect(response.status).to eq 500
+      expect(response.content_type).to include('application/json')
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Erro ao estabelecer uma conexão com o banco de dados'
+    end
   end
 end

@@ -139,7 +139,7 @@ describe 'User enters new items' do
 
         expect(current_path).to eq warehouse_path(w1.id)
         expect(page).to have_content 'Erro! Não foi possível realizar a entrada dos itens'
-        expect(page).to have_css('h1', text: 'Maceió')
+        expect(page).not_to have_content "div#product-#{p1.id}"
       end
     end
   end
