@@ -76,7 +76,7 @@ class WarehousesController < ApplicationController
     if process_entry.process()
       redirect_to warehouse_path, notice: 'Entrada de itens realizada com sucesso!'
     else
-      flash[:alert] = 'Não foi possível dar entrada nos itens solicitados'
+      flash[:alert] = 'Erro! Não foi possível realizar a entrada dos itens'
       redirect_to warehouse_path
     end
   end
