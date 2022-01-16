@@ -13,7 +13,7 @@ describe 'User register new product category' do
 
     login_as user
     visit root_path
-    click_on 'Cadastrar nova categoria de produtos'
+    click_on 'Cadastrar nova categoria'
 
     expect(page).to have_css 'h1', text: 'Nova Categoria de Produtos'
     expect(page).to have_field 'Nome'

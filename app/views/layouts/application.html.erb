@@ -23,12 +23,13 @@
       <nav aria-label="Navigation Menu">
         <%= link_to 'Página inicial', root_path %>
         <% if user_signed_in? %>
+          <%= link_to 'Entrada de Itens', product_items_entry_path %>
+          <br>
           <%= link_to 'Cadastrar novo galpão', new_warehouse_path %>
           <%= link_to 'Cadastrar novo fornecedor', new_supplier_path %>
           <%= link_to 'Cadastrar novo produto', new_product_model_path %>
-          <%= link_to 'Cadastrar nova categoria de produtos', new_product_category_path %>
+          <%= link_to 'Cadastrar nova categoria', new_product_category_path %>
           <%= link_to 'Cadastrar novo bundle', new_product_bundle_path %>
-          <%= link_to 'Entrada de Itens', product_items_entry_path %>
         <% end %>
       </nav>
     </header>

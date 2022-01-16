@@ -8,10 +8,9 @@ class ProductEntry
   end
 
   def process
-    # return false unless valid?
     warehouse = Warehouse.find(warehouse_id)
     product_model = ProductModel.find(product_model_id)
-
+    return false unless (valid? && warehouse.product_category_ids.include?(product_model.product_category_id))
     ProductItem.transaction do
       quantity.times do
         ProductItem.create!(warehouse: warehouse, product_model: product_model)
@@ -23,8 +22,7 @@ class ProductEntry
 
   private
 
-  # def valid?
-  #   @quantity > 0;
-  #   warehouse.product_categories.include?(product_model.product_category)
-  # end
+  def valid?
+    @quantity > 0
+  end
 end
