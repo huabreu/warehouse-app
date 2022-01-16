@@ -1,4 +1,6 @@
 class ProductItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new_entry, :process_entry]
+
   def new_entry
     @warehouses = Warehouse.all 
     @product_models = ProductModel.all

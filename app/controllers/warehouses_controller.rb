@@ -57,17 +57,27 @@ class WarehousesController < ApplicationController
   end
 
   def product_entry
-    quantity = params[:quantity].to_i
-    warehouse_id = params[:id]
-    product_model_id = params[:product_model_id]
+    # quantity = params[:quantity].to_i
+    # warehouse_id = params[:id]
+    # product_model_id = params[:product_model_id]
 
-    warehouse = Warehouse.find(warehouse_id)
-    product_model = ProductModel.find(product_model_id)
-
-    quantity.times do
-      ProductItem.create(warehouse: warehouse, product_model: product_model)
-    end
+    # warehouse = Warehouse.find(warehouse_id)
+    # product_model = ProductModel.find(product_model_id)
     
-    redirect_to warehouse
+    # quantity.times do
+    #   ProductItem.create(warehouse: warehouse, product_model: product_model)
+    # end
+    
+    # redirect_to warehouse
+
+    process_entry = ProductEntry.new(quantity: params[:quantity].to_i, warehouse_id: params[:id],
+    product_model_id: params[:product_model_id])
+
+    if process_entry.process()
+      redirect_to warehouse_path, notice: 'Entrada de itens realizada com sucesso!'
+    else
+      flash[:alert] = 'Não foi possível dar entrada nos itens solicitados'
+      redirect_to warehouse_path
+    end
   end
 end

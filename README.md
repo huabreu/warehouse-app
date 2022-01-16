@@ -26,26 +26,12 @@ Status: 200 (OK)
     "id": 1,
     "name": "Maceió",
     "code": "MCZ",
-    "description": "Ótimo galpão numa linda cidade",
-    "address": "Av. Fernandes Lima, 1000",
-    "city": "Maceió",
-    "state": "AL",
-    "postal_code": "57050-000",
-    "total_area": 10000,
-    "useful_area": 8000
   },
   
   {
     "id": 2,
     "name": "JF Galpões",
     "code": "JFG",
-    "description": "Lindo galpão a beira mar",
-    "address": "Av. Rio Branco, 1254",
-    "city": "Juiz de Fora",
-    "state": "MG",
-    "zip_code": "36015-412",
-    "total_area": 10000,
-    "useful_area": 2500
   }
 ]
 ```

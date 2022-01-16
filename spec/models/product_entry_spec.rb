@@ -1,6 +1,6 @@
-require 'rails_helper'
+# require 'rails_helper'
 
-# context 'Quantity must be greater than zero' do
+# context '.process' do
 #   it 'but is less than zero' do
 #     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
 #     s = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
