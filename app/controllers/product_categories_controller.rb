@@ -1,5 +1,5 @@
-class ProductCategoriesController < ApplicationController 
-  before_action :authenticate_user!, only: [:new, :create, :destroy]
+class ProductCategoriesController < ApplicationController
+  before_action :authenticate_user!, only: %i[new create destroy]
 
   def new
     @product_category = ProductCategory.new

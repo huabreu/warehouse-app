@@ -4,8 +4,8 @@ describe 'User enters new items' do
   context 'through link on home page' do
     it 'visitor is unable to access the form' do
       visit product_items_entry_path
-      #assert
-      expect(current_path).to eq  new_user_session_path
+      # assert
+      expect(current_path).to eq new_user_session_path
       expect(page).to have_content 'Para continuar, faça login ou registre-se.'
     end
 
@@ -14,7 +14,8 @@ describe 'User enters new items' do
       c = create(:product_category)
       w = create(:warehouse, code: 'MCZ', product_category_ids: [c.id])
       create(:warehouse, name: 'Juiz de Fora', code: 'JFG')
-      pm = create(:product_model, name: 'Teclado Digitador',  product_category: c)
+      pm = create(:product_model, name: 'Teclado Digitador',
+                                  product_category: c)
       s = create(:supplier, cnpj: '1236464643231')
       create(:product_model, product_category: c, supplier: s)
 
@@ -41,14 +42,14 @@ describe 'User enters new items' do
     context 'without success' do
       it 'because invalid product category' do
         user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-        s = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
-          cnpj: '1134567818234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
+        s = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA',
+                             cnpj: '1134567818234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
         c = ProductCategory.create!(name: 'Teste')
         c2 = ProductCategory.create!(name: 'Erro')
         w1 = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão no centro da cidade',
-          address: 'Av. Fernandes Lima', city: 'Maceió', state: 'AL',
-          zip_code: '57050-000', total_area: 10000, useful_area: 8000, product_category_ids: [c2.id])
-        p1 = ProductModel.create!(name:'Teclado Digitador', supplier: s, product_category: c,
+                               address: 'Av. Fernandes Lima', city: 'Maceió', state: 'AL',
+                               zip_code: '57050-000', total_area: 10_000, useful_area: 8000, product_category_ids: [c2.id])
+        p1 = ProductModel.create!(name: 'Teclado Digitador', supplier: s, product_category: c,
                                   weight: 200, width: 30, height: 5, length: 12)
 
         login_as(user)
@@ -69,29 +70,29 @@ describe 'User enters new items' do
   context 'through form on warehouse details page' do
     it 'visitor is unable to access the form' do
       w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão no centro da cidade',
-        address: 'Av. Fernandes Lima', city: 'Maceió', state: 'AL',
-        zip_code: '57050-000', total_area: 10000, useful_area: 8000)
+                            address: 'Av. Fernandes Lima', city: 'Maceió', state: 'AL',
+                            zip_code: '57050-000', total_area: 10_000, useful_area: 8000)
 
       visit warehouse_path(w.id)
-      #assert
+      # assert
       expect(page).not_to have_content 'Entrada de Itens'
       expect(page).to have_css('h1', text: 'Maceió')
     end
 
     it 'with success' do
       user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-      s = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
-        cnpj: '1134567818234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
+      s = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA',
+                           cnpj: '1134567818234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
       c = ProductCategory.create!(name: 'Teste')
       w1 = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão no centro da cidade',
-        address: 'Av. Fernandes Lima', city: 'Maceió', state: 'AL', product_category_ids: [c.id],
-        zip_code: '57050-000', total_area: 10000, useful_area: 8000)
+                             address: 'Av. Fernandes Lima', city: 'Maceió', state: 'AL', product_category_ids: [c.id],
+                             zip_code: '57050-000', total_area: 10_000, useful_area: 8000)
       w2 = Warehouse.create!(name: 'Curitiba', code: 'CTB', description: 'Ótimo galpão mas é frio',
-        address: 'Av Coritiba', city: 'Curitiba', state: 'PR', zip_code: '87050-000',
-        total_area: 5000, useful_area: 4000, product_category_ids: [c.id])
-      p1 = ProductModel.create!(name:'Teclado Digitador', supplier: s, product_category: c,
+                             address: 'Av Coritiba', city: 'Curitiba', state: 'PR', zip_code: '87050-000',
+                             total_area: 5000, useful_area: 4000, product_category_ids: [c.id])
+      p1 = ProductModel.create!(name: 'Teclado Digitador', supplier: s, product_category: c,
                                 weight: 200, width: 30, height: 5, length: 12)
-      p2 = ProductModel.create!(name:'Som Muito Alto', supplier: s, product_category: c,
+      p2 = ProductModel.create!(name: 'Som Muito Alto', supplier: s, product_category: c,
                                 weight: 500, width: 30, height: 20, length: 12)
 
       login_as(user)
@@ -113,14 +114,14 @@ describe 'User enters new items' do
     context 'without success' do
       it 'because invalid quantity' do
         user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-        s = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
-          cnpj: '1134567818234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
+        s = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA',
+                             cnpj: '1134567818234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
         c = ProductCategory.create!(name: 'Teste')
         c2 = ProductCategory.create!(name: 'Erro')
         w1 = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão no centro da cidade',
-          address: 'Av. Fernandes Lima', city: 'Maceió', state: 'AL',
-          zip_code: '57050-000', total_area: 10000, useful_area: 8000, product_category_ids: [c.id])
-        p1 = ProductModel.create!(name:'Teclado Digitador', supplier: s, product_category: c,
+                               address: 'Av. Fernandes Lima', city: 'Maceió', state: 'AL',
+                               zip_code: '57050-000', total_area: 10_000, useful_area: 8000, product_category_ids: [c.id])
+        p1 = ProductModel.create!(name: 'Teclado Digitador', supplier: s, product_category: c,
                                   weight: 200, width: 30, height: 5, length: 12)
 
         login_as(user)

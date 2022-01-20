@@ -2,18 +2,18 @@ require 'rails_helper'
 
 describe 'User register bundle' do
   it 'visitor is unable to access the form' do
-    #arrange
-    #act
+    # arrange
+    # act
     visit new_product_bundle_path
-    #assert
-    expect(current_path).to eq  new_user_session_path
+    # assert
+    expect(current_path).to eq new_user_session_path
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 
   it 'through a link on the homepage' do
-    #arrange
+    # arrange
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-    #act
+    # act
     login_as(user)
     visit root_path
     click_on 'Cadastrar novo bundle'
@@ -26,17 +26,17 @@ describe 'User register bundle' do
   end
 
   it 'with success' do
-    supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
+    supplier = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA',
                                 cnpj: '1234567811234', email: 'iippiiranga@hotmail.com')
     category = ProductCategory.create!(name: 'Eletrônicos Potentes')
-    ProductModel.create!(name:'Caixas de Som Blast', supplier: supplier, product_category: category,
+    ProductModel.create!(name: 'Caixas de Som Blast', supplier: supplier, product_category: category,
                          weight: 200, width: 30, height: 15, length: 12)
-    ProductModel.create!(name:'Som Muito Alto', supplier: supplier, product_category: category,
+    ProductModel.create!(name: 'Som Muito Alto', supplier: supplier, product_category: category,
                          weight: 500, width: 30, height: 20, length: 12)
-    ProductModel.create!(name:'PC Potente', supplier: supplier, product_category: category,
+    ProductModel.create!(name: 'PC Potente', supplier: supplier, product_category: category,
                          weight: 400, width: 30, height: 10, length: 12)
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-    
+
     login_as(user)
     visit root_path
     click_on 'Cadastrar novo bundle'
@@ -56,7 +56,7 @@ describe 'User register bundle' do
 
   it 'without success' do
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-    
+
     login_as(user)
     visit new_product_bundle_path
     click_on 'Salvar'

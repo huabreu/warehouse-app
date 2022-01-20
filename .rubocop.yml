@@ -28,8 +28,8 @@ Style/FrozenStringLiteralComment:
 
 # Escrevemos mais linhas em arquivos de teste do que em arquivos de 
 # código, então é importante poder ter esses arquivos do tamanho necessário
-Layout:
- ExcludedMethods: ['describe', 'context', 'feature', 'scenario', 'let']
+Layout/LineLength:
+ ExcludedMethods: ['describe', 'context', 'feature', 'scenario', 'let', 'it']
 
 # Costumamos usar o padrão do RuboCop, mas caso queira alterar o tamanho de
 # caracteres de uma linha, você pode fazê-lo aqui

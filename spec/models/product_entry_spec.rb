@@ -3,7 +3,7 @@
 # context '.process' do
 #   it 'but is less than zero' do
 #     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-#     s = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA', 
+#     s = Supplier.create!(trade_name: 'Ipiranga Logisticas', company_name: 'Ipiranga Logisticas SA',
 #       cnpj: '1134567818234', address: 'Av. Don Pedro II', email: 'iippiiranga@hotmail.com', phone: '345896654')
 #     c = ProductCategory.create!(name: 'Teste')
 #     w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão no centro da cidade',

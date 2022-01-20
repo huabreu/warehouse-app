@@ -2,17 +2,17 @@ require 'rails_helper'
 
 describe 'visitor register supplier' do
   it 'visitor is unable to access the form' do
-    #act
+    # act
     visit new_supplier_path
-    #assert
+    # assert
     expect(current_path).to eq new_user_session_path
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 
   it 'through a link on the homepage' do
-    #arrange
+    # arrange
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-    #act
+    # act
     login_as(user)
     visit root_path
     click_on 'Cadastrar novo fornecedor'
@@ -28,9 +28,9 @@ describe 'visitor register supplier' do
   end
 
   it 'with success' do
-    #arrange
+    # arrange
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-    #act
+    # act
     login_as(user)
     visit root_path
     click_on 'Cadastrar novo fornecedor'
@@ -41,8 +41,8 @@ describe 'visitor register supplier' do
     fill_in 'E-mail', with: 'jfg@gmail.com'
     fill_in 'Telefone', with: '3215-6936'
     click_on 'Salvar'
-    
-    #assert
+
+    # assert
     expect(page).to have_content('FJF')
     expect(page).to have_content('Fornecedor Juiz Forano')
     expect(page).to have_content('2546321475668')
@@ -54,9 +54,9 @@ describe 'visitor register supplier' do
   end
 
   it 'without success' do
-    #arrange
+    # arrange
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-    #act
+    # act
     login_as(user)
     visit root_path
     click_on 'Cadastrar novo fornecedor'
@@ -70,15 +70,15 @@ describe 'visitor register supplier' do
 
     expect(page).not_to have_content('Fornecedor cadastrado com sucesso!')
     expect(page).to have_content('Erro! Não foi possível salvar o fornecedor!')
-    expect(page).to have_content("Nome Fantasia não pode ficar em branco")
-    expect(page).to have_content("Razão Social não pode ficar em branco")
-    expect(page).to have_content("CNPJ não pode ficar em branco")
-    expect(page).to have_content("E-mail não pode ficar em branco")
+    expect(page).to have_content('Nome Fantasia não pode ficar em branco')
+    expect(page).to have_content('Razão Social não pode ficar em branco')
+    expect(page).to have_content('CNPJ não pode ficar em branco')
+    expect(page).to have_content('E-mail não pode ficar em branco')
   end
 
   # it 'but CNPJ must be unique' do
 
-  #   Supplier.create(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA', 
+  #   Supplier.create(trade_name: 'Fornecedor Bonito', company_name: 'Fornecedor Bonito e Formoso SA',
   #                   cnpj: '1234567891234', email: 'fbonito@hotmail.com')
 
   #   visit root_path

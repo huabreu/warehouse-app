@@ -1,6 +1,7 @@
 class ProductModelsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy, :edit, :update]
-  
+  before_action :authenticate_user!,
+                only: %i[new create destroy edit update]
+
   def new
     @product_model = ProductModel.new
   end
@@ -34,8 +35,8 @@ class ProductModelsController < ApplicationController
   def update
     @product_model = ProductModel.find(params[:id])
     @product_model.update(params.require(:product_model).permit(:name, :supplier_id, :product_category_id,
-                                                                 :height, :width, :length, :weight))
-    if @product_model.save()
+                                                                :height, :width, :length, :weight))
+    if @product_model.save
       redirect_to @product_model, notice: 'Produto editado com sucesso!'
     else
       flash.now[:alert] = 'Erro! Não foi possível editar o produto!'

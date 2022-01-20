@@ -5,7 +5,7 @@ FactoryBot.define do
     width { 10 }
     height  { 10 }
     length { 10 }
-    supplier  
-    product_category 
+    supplier
+    product_category
   end
 end

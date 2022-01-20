@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'User register new product category' do
   it 'visitor is unable to access the form' do
     visit new_product_category_path
-    
-    expect(current_path).to eq  new_user_session_path
+
+    expect(current_path).to eq new_user_session_path
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 
@@ -41,6 +41,6 @@ describe 'User register new product category' do
 
     expect(page).not_to have_content('Categoria cadastrada com sucesso!')
     expect(page).to have_content('Erro! Não foi possível cadastrar a nova categoria!')
-    expect(page).to have_content("Nome não pode ficar em branco")
+    expect(page).to have_content('Nome não pode ficar em branco')
   end
 end

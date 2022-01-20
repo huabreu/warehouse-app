@@ -1,16 +1,17 @@
 class ProductItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new_entry, :process_entry]
+  before_action :authenticate_user!, only: %i[new_entry process_entry]
 
   def new_entry
-    @warehouses = Warehouse.all 
+    @warehouses = Warehouse.all
     @product_models = ProductModel.all
   end
 
   def process_entry
     product_entry = ProductEntry.new(quantity: params[:quantity], product_model_id: params[:product_model_id],
-                     warehouse_id: params[:warehouse_id])
-    if product_entry.process()
-      redirect_to warehouse_path(product_entry.warehouse_id), notice: 'Entrada do novo lote realizada com sucesso!'
+                                     warehouse_id: params[:warehouse_id])
+    if product_entry.process
+      redirect_to warehouse_path(product_entry.warehouse_id),
+                  notice: 'Entrada do novo lote realizada com sucesso!'
     else
       flash[:alert] = 'Erro! Não foi possível completar a solicitação'
       redirect_back fallback_location: 'new_entry'

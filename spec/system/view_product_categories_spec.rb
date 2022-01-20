@@ -14,11 +14,10 @@ describe 'Visitor visit list of product categories' do
   end
 
   it 'but there is no category registered yet' do
+    visit root_path
+    click_on 'Categorias de produto'
 
-  visit root_path
-  click_on 'Categorias de produto'
-
-  expect(page).to have_css 'h1', text: 'Categorias de Produto Cadastradas'
-  expect(page).to have_content 'Não existem categorias cadastradas no sistema'
+    expect(page).to have_css 'h1', text: 'Categorias de Produto Cadastradas'
+    expect(page).to have_content 'Não existem categorias cadastradas no sistema'
   end
 end

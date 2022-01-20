@@ -2,17 +2,17 @@ require 'rails_helper'
 
 describe 'user register warehouse' do
   it 'visitor is unable to access the form' do
-    #act
+    # act
     visit new_warehouse_path
-    #assert
-    expect(current_path).to eq  new_user_session_path
+    # assert
+    expect(current_path).to eq new_user_session_path
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 
   it 'through a link on the homepage' do
-    #arrange
+    # arrange
     User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-    #act
+    # act
     visit root_path
     click_on 'Entrar'
     within('form#new_user') do
@@ -21,7 +21,7 @@ describe 'user register warehouse' do
       click_on 'Entrar'
     end
     click_on 'Cadastrar novo galpão'
-    #assert
+    # assert
     expect(page).to have_content 'Novo Galpão'
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Código'
@@ -32,17 +32,17 @@ describe 'user register warehouse' do
     expect(page).to have_field 'CEP'
     expect(page).to have_field 'Área Total'
     expect(page).to have_field 'Área Útil'
-    expect(page).to have_content 'Categorias de produtos:' 
+    expect(page).to have_content 'Categorias de produtos:'
     expect(page).to have_button 'Salvar'
   end
 
   it 'with success' do
-    #arrange
+    # arrange
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
     c1 = ProductCategory.create!(name: 'Eletrônicos')
     c2 = ProductCategory.create!(name: 'Frios')
     c3 = ProductCategory.create!(name: 'Cosméticos')
-    #act
+    # act
     login_as(user)
     visit root_path
     click_on 'Cadastrar novo galpão'
@@ -58,8 +58,8 @@ describe 'user register warehouse' do
     check 'Eletrônicos'
     check 'Cosméticos'
     click_on 'Salvar'
-    
-    #assert
+
+    # assert
     expect(page).to have_content('Galpão cadastrado com sucesso!')
     expect(page).to have_content('Juiz de Fora')
     expect(page).to have_content('JDF')
@@ -75,9 +75,9 @@ describe 'user register warehouse' do
   end
 
   it 'without success' do
-    #arrange
+    # arrange
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-    #act
+    # act
     login_as(user)
     visit root_path
     click_on 'Cadastrar novo galpão'
@@ -92,17 +92,17 @@ describe 'user register warehouse' do
     # fill_in 'Área Útil', with: ''
     click_on 'Salvar'
 
-    #assert
+    # assert
     expect(page).not_to have_content('Galpão cadastrado com sucesso!')
     expect(page).to have_content('Erro! Não foi possível salvar o galpão!')
-    expect(page).to have_content("Nome não pode ficar em branco")
-    expect(page).to have_content("Código não pode ficar em branco")
-    expect(page).to have_content("Descrição não pode ficar em branco")
-    expect(page).to have_content("Endereço não pode ficar em branco")
-    expect(page).to have_content("Cidade não pode ficar em branco")
-    expect(page).to have_content("Estado não pode ficar em branco")
-    expect(page).to have_content("CEP não pode ficar em branco")
-    expect(page).to have_content("Área Total não pode ficar em branco")
-    expect(page).to have_content("Área Útil não pode ficar em branco")
+    expect(page).to have_content('Nome não pode ficar em branco')
+    expect(page).to have_content('Código não pode ficar em branco')
+    expect(page).to have_content('Descrição não pode ficar em branco')
+    expect(page).to have_content('Endereço não pode ficar em branco')
+    expect(page).to have_content('Cidade não pode ficar em branco')
+    expect(page).to have_content('Estado não pode ficar em branco')
+    expect(page).to have_content('CEP não pode ficar em branco')
+    expect(page).to have_content('Área Total não pode ficar em branco')
+    expect(page).to have_content('Área Útil não pode ficar em branco')
   end
 end

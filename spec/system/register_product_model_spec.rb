@@ -2,17 +2,17 @@ require 'rails_helper'
 
 describe 'User register product model' do
   it 'visitor is unable to access the form' do
-    #act
+    # act
     visit new_product_model_path
-    #assert
-    expect(current_path).to eq  new_user_session_path
+    # assert
+    expect(current_path).to eq new_user_session_path
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 
   it 'through a link on the homepage' do
-    #arrange
+    # arrange
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-    #act
+    # act
     login_as(user)
     visit root_path
     click_on 'Cadastrar novo produto'
@@ -29,15 +29,15 @@ describe 'User register product model' do
   end
 
   it 'with success' do
-    #arrange
-    Supplier.create!(trade_name: 'Ceramicas Geek', company_name: 'Ceramicas Geeks SA', 
-                     cnpj: 1234567891123, email: 'ceramicgeek@gmaial.com')
-    Supplier.create!(trade_name: 'Imaginarium', company_name: 'Imaginarium SA', 
-    cnpj: 1234547891123, email: 'imaginarium@gmaial.com')
-    category = ProductCategory.create!(name: 'Super Categoria') 
+    # arrange
+    Supplier.create!(trade_name: 'Ceramicas Geek', company_name: 'Ceramicas Geeks SA',
+                     cnpj: 1_234_567_891_123, email: 'ceramicgeek@gmaial.com')
+    Supplier.create!(trade_name: 'Imaginarium', company_name: 'Imaginarium SA',
+                     cnpj: 1_234_547_891_123, email: 'imaginarium@gmaial.com')
+    category = ProductCategory.create!(name: 'Super Categoria')
 
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-    #act
+    # act
     login_as(user)
     visit root_path
     click_on 'Cadastrar novo produto'
@@ -50,7 +50,7 @@ describe 'User register product model' do
     select 'Super Categoria', from: 'Categoria'
     click_on 'Salvar'
 
-    #assert
+    # assert
     p = ProductModel.last
     expect(page).to have_content 'Produto cadastrado com sucesso!'
     expect(page).to have_content 'Caneca Star Wars'
@@ -64,21 +64,20 @@ describe 'User register product model' do
   end
 
   it 'without success' do
-    #arrange
+    # arrange
     user = User.create!(email: 'hugorabreu@gmail.com', password: '123456')
-    #act
+    # act
     login_as(user)
     visit new_product_model_path
     click_on 'Salvar'
-  
+
     expect(page).not_to have_content('Produto cadastrado com sucesso!')
     expect(page).to have_content('Erro! Não foi possível cadastrar o produto!')
-    expect(page).to have_content("Nome não pode ficar em branco")
-    expect(page).to have_content("Peso não pode ficar em branco")
-    expect(page).to have_content("Altura não pode ficar em branco")
-    expect(page).to have_content("Largura não pode ficar em branco")
-    expect(page).to have_content("Comprimento não pode ficar em branco")
-    expect(page).to have_content("Fornecedor é obrigatório(a)")
+    expect(page).to have_content('Nome não pode ficar em branco')
+    expect(page).to have_content('Peso não pode ficar em branco')
+    expect(page).to have_content('Altura não pode ficar em branco')
+    expect(page).to have_content('Largura não pode ficar em branco')
+    expect(page).to have_content('Comprimento não pode ficar em branco')
+    expect(page).to have_content('Fornecedor é obrigatório(a)')
   end
 end
-

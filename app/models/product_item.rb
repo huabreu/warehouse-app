@@ -5,15 +5,13 @@ class ProductItem < ApplicationRecord
   before_validation :generate_sku
 
   validates :sku_code,
-  presence: true
-  validates :sku_code, 
-  uniqueness: true
+            presence: true
+  validates :sku_code,
+            uniqueness: true
 
   private
 
   def generate_sku
-    if sku_code.nil?
-      self.sku_code = SecureRandom.alphanumeric(20) 
-    end
-  end  
+    self.sku_code = SecureRandom.alphanumeric(20) if sku_code.nil?
+  end
 end
