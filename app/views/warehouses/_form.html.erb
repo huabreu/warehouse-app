@@ -7,7 +7,45 @@
 </ul>
 <% end %>
 
-<%= form_with(model: warehouse) do |form| %>
+<%= simple_form_for @warehouse do |f| %>
+  <div>
+    <%= f.input :name %>
+  </div><br>
+  <div>
+    <%= f.input :code %>
+  </div><br>
+  <div>
+    <%= f.input :description %>
+  </div><br>
+  <div>
+    <%= f.input :address %>
+  </div><br>
+  <div>
+    <%= f.input :city %>
+  </div><br>
+  <div>
+    <%= f.input :state %>
+  </div><br>
+  <div>
+    <%= f.input :zip_code %>
+  </div><br>
+  <div>
+    <%= f.input :total_area %>
+  </div><br>
+  <div>
+    <%= f.input :useful_area %>
+  </div><br>
+  <div>
+    <span>Categorias de produtos:</span>
+    <%= f.association :product_categories, as: :check_boxes, label: '' %>
+  </div><br>
+  <%= f.submit 'Salvar' %>
+
+<% end %>
+
+
+
+<!-- <%= form_with(model: warehouse) do |form| %>
   <div>
     <%= form.label :name %>
     <%= form.text_field(:name) %>
@@ -48,6 +86,6 @@
     <span>Categorias de produtos:</span>
     <%= form.collection_check_boxes :product_category_ids, ProductCategory.all, :id, :name %>
   </div>
-  <%= form.submit 'Salvar' %>
+  <%= form.submit 'Salvar' %> -->
 
-<% end %>
+<!-- <% end %> -->
