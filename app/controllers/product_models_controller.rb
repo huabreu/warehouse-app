@@ -43,4 +43,16 @@ class ProductModelsController < ApplicationController
       render 'edit'
     end
   end
+
+  def activate
+    product = ProductModel.find(params[:id])
+    product.active!
+    redirect_to product
+  end
+
+  def disable
+    product = ProductModel.find(params[:id])
+    product.inactive!
+    redirect_to product
+  end
 end

@@ -93,4 +93,72 @@ describe 'Visitor view product model details' do
     #   expect(page).to have_content 'Não existem itens desse modelo em nenhum galpão no momento'
     # end
   end
+
+  context 'Product is activate' do
+    it 'visitor is unable to deactivate product model' do
+      supplier = create(:supplier)
+      category = ProductCategory.create!(name: 'Super Produtos')
+      warehouse = create(:warehouse)
+      pm = ProductModel.create!(name: 'Teclado Digitador', supplier: supplier, product_category: category,
+                                weight: 200, width: 30, height: 5, length: 12)
+
+      visit product_model_path(pm.id)
+
+      expect(page).to have_css('h1', text: 'Teclado Digitador')
+      expect(page).not_to have_button 'Desativar'
+      expect(page).to have_content 'Status: active'
+    end
+
+    it 'user deactivate product with success' do
+      supplier = create(:supplier)
+      category = ProductCategory.create!(name: 'Super Produtos')
+      warehouse = create(:warehouse)
+      pm = ProductModel.create!(name: 'Teclado Digitador', supplier: supplier, product_category: category,
+                                weight: 200, width: 30, height: 5, length: 12)
+      user = create(:user)
+
+      login_as user
+      visit product_model_path(pm.id)
+      click_on 'Desativar'
+
+      expect(current_path).to eq product_model_path(pm.id)
+      expect(page).to have_button 'Ativar'
+      expect(page).to have_content 'Status: inactive'
+    end
+  end
+
+  context 'Product is inactive' do
+    it 'visitor is unable to activate product model' do
+      supplier = create(:supplier)
+      category = ProductCategory.create!(name: 'Super Produtos')
+      warehouse = create(:warehouse)
+      pm = ProductModel.create!(name: 'Teclado Digitador', supplier: supplier, product_category: category,
+                                weight: 200, width: 30, height: 5, length: 12)
+      pm.inactive!
+
+      visit product_model_path(pm.id)
+
+      expect(page).to have_css('h1', text: 'Teclado Digitador')
+      expect(page).not_to have_button 'Ativar'
+      expect(page).to have_content 'Status: inactive'
+    end
+
+    it 'user activate product with success' do
+      supplier = create(:supplier)
+      category = ProductCategory.create!(name: 'Super Produtos')
+      warehouse = create(:warehouse)
+      pm = ProductModel.create!(name: 'Teclado Digitador', supplier: supplier, product_category: category,
+                                weight: 200, width: 30, height: 5, length: 12)
+      user = create(:user)
+      pm.inactive!
+
+      login_as user
+      visit product_model_path(pm.id)
+      click_on 'Ativar'
+
+      expect(current_path).to eq product_model_path(pm.id)
+      expect(page).to have_button 'Desativar'
+      expect(page).to have_content 'Status: active'
+    end
+  end
 end

@@ -5,6 +5,8 @@ class ProductModel < ApplicationRecord
   has_many :product_bundles, through: :product_bundle_items
   has_many :product_items
 
+  enum status: { inactive: 0, active: 1 }
+
   before_validation :generate_sku
 
   validates :name, :weight, :height, :width, :length,

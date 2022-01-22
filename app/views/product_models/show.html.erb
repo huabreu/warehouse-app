@@ -13,18 +13,30 @@
   <dd><%= @product_model.width %> cm</dd>
   <dt>Comprimento:</dt>
   <dd><%= @product_model.length %> cm</dd>
+  <dt>Status:</dt>
+  <dd><%= @product_model.status %></dd>
+  <br>
+  <% if user_signed_in? %>
+    <% if @product_model.active? %>
+      <%= button_to 'Desativar', disable_product_model_path, { method: 'patch' } %>
+    <% elsif @product_model.inactive? %>
+      <%= button_to 'Ativar', activate_product_model_path, { method: 'patch' } %>
+    <% end %>
+  <% end %>
 </dl>
 
+<nav>
+  <%= link_to 'Editar', edit_product_model_path(@product_model) %>
+</nav>
+<br>
 <h2>Itens:</h2>
-
 <% @items.each_pair do |id, quantity| %>
   <div id="warehouse-<%= id %>">
     Galpão: <%= Warehouse.find(id).name %>
     Quantidade: <%= quantity %>
   </div>
 <% end %>
-
+<br>
 <nav>
-  <%= link_to 'Editar', edit_product_model_path(@product_model) %>
   <%= link_to 'Voltar', product_models_path %>
 </nav>

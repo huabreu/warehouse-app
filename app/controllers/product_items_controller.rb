@@ -17,4 +17,5 @@ class ProductItemsController < ApplicationController
       redirect_back fallback_location: 'new_entry'
     end
   end
+
 end
